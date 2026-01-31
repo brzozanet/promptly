@@ -24,12 +24,12 @@ npm run dev
 
 **Oczekiwany rezultat**: Działający dev server na `localhost:5173`
 
-**Czek list**:
+**Lista zadań**:
 
-- [ ] Projekt utworzony
-- [ ] npm install wykonany
-- [ ] Dev server uruchomiony
-- [ ] Aplikacja wyświetla się w przeglądarce
+- [x] Projekt utworzony
+- [x] npm install wykonany
+- [x] Dev server uruchomiony
+- [x] Aplikacja wyświetla się w przeglądarce
 
 ---
 
@@ -68,7 +68,7 @@ npx shadcn-ui@latest add scroll-area
 
 **Oczekiwany rezultat**: Wszystkie zależności zainstalowane i gotowe do użycia
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] Zustand zainstalowany
 - [ ] TailwindCSS skonfigurowany (tailwind.config.js istnieje)
@@ -103,7 +103,7 @@ src/
 
 **Oczekiwany rezultat**: Wszystkie foldery i puste pliki
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] Folder `components/` istnieje z 4 plikami
 - [ ] Folder `store/` istnieje
@@ -148,7 +148,7 @@ export interface ChatRequest {
 
 **Oczekiwany rezultat**: Plik z kompletnym typowaniem
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] Message interface zdefiniowany
 - [ ] ChatState interface zdefiniowany
@@ -194,7 +194,7 @@ export const useChatStore = create<ChatState>((set) => ({
 
 **Oczekiwany rezultat**: Działający store do zarządzania stanem czatu
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] Store importuje się bez błędów
 - [ ] Wszystkie metody są dostępne
@@ -269,7 +269,7 @@ export const chatService = {
 
 **Oczekiwany rezultat**: Service działający z realnym i mock endpointem
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] sendMessage() wysyła żądanie do backendu (będzie dostępne w Sprint 2)
 - [ ] sendMessageMock() zwraca mock odpowiedź
@@ -316,7 +316,7 @@ export const Message = ({ role, content, timestamp }: MessageProps) => {
 
 **Oczekiwany rezultat**: Komponenta wyświetlająca pojedynczą wiadomość
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] Wiadomości użytkownika są niebieskie po prawej
 - [ ] Wiadomości AI są szare po lewej
@@ -372,7 +372,7 @@ export const MessageList = () => {
 
 **Oczekiwany rezultat**: Lista wiadomości z auto-scroll
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] Wiadomości wyświetlają się w kolejności
 - [ ] Auto-scroll do dołu działa
@@ -462,7 +462,7 @@ export const ChatInput = () => {
 
 **Oczekiwany rezultat**: Input do wysyłania wiadomości
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] Enter wysyła wiadomość
 - [ ] Shift+Enter robi nową linię
@@ -512,7 +512,7 @@ export const ChatWindow = () => {
 
 **Oczekiwany rezultat**: Główny kontener czatu
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] Header wyświetla się
 - [ ] MessageList się renderuje
@@ -545,7 +545,7 @@ export default App;
 
 **Oczekiwany rezultat**: Główny App komponenty
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] ChatWindow się renderuje
 - [ ] Cała strona zajmuje 100% wysokości
@@ -584,7 +584,7 @@ body {
 
 **Oczekiwany rezultat**: Globalne style
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] TailwindCSS działa
 - [ ] Shadcn/ui komponenty mają prawidłowe style
@@ -632,7 +632,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 **Oczekiwany rezultat**: Aplikacja renderuje się w DOM
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] Root element istnieje w HTML
 - [ ] React inicjalizuje się prawidłowo
@@ -668,7 +668,7 @@ VITE_API_URL=http://localhost:3001
 
 **Oczekiwany rezultat**: Konfiguracja environment variables
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] `.env.local` istnieje i nie jest commitowany
 - [ ] `.gitignore` zawiera `.env.local`
@@ -708,7 +708,7 @@ npm run dev
 
 **Oczekiwany rezultat**: Aplikacja działa bez błędów
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] Brak błędów w console
 - [ ] Brak warnings w console
@@ -760,7 +760,7 @@ build
 
 **Oczekiwany rezultat**: Projekt na GitHubie
 
-**Czek list**:
+**Lista zadań**:
 
 - [ ] Repo utworzony na GitHubie
 - [ ] Kod zacommitowany
@@ -772,7 +772,7 @@ build
 
 | Task               | Czas     | Status |
 | ------------------ | -------- | ------ |
-| 1.1: Inicjalizacja | 0.5h     | [ ]    |
+| 1.1: Inicjalizacja | 0.5h     | [x]    |
 | 1.2: Zależności    | 0.5h     | [ ]    |
 | 1.3: Struktura     | 0.5h     | [ ]    |
 | 1.4: Types         | 1h       | [ ]    |
