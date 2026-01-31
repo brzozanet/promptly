@@ -1,4 +1,4 @@
-# Sprint 1: Frontend Setup & Architektura
+# Sprint 1: Frontend Setup & Architektura - Promptly Photo
 
 ## 📋 Cele Sprintu
 
@@ -7,7 +7,7 @@
 - [ ] Struktura folderów i architektura
 - [ ] Setup state managementu (Zustand)
 - [ ] Komponenty podstawowe (layout, chat input)
-- [ ] Mock API dla testowania UI
+- [ ] Mock API dla testowania UI (Photography-focused)
 
 ---
 
@@ -16,8 +16,8 @@
 ### Task 1.1: Inicjalizacja Projektu (0.5h)
 
 ```bash
-npm create vite@latest promptly-chat -- --template react-ts
-cd promptly-chat
+npm create vite@latest promptly-photo -- --template react-ts
+cd promptly-photo
 npm install
 npm run dev
 ```
@@ -240,15 +240,18 @@ export const chatService = {
 
   /**
    * Mock API - używany do testowania bez backendu
-   * Simuluje opóźnienie jak prawdziwy serwer
+   * Symuluje opóźnienie jak prawdziwy serwer
+   * Zwraca Photography-focused odpowiedzi
    */
   async sendMessageMock(userMessage: string): Promise<ChatResponse> {
     return new Promise((resolve) => {
       setTimeout(() => {
         const mockResponses = [
-          `Echo: ${userMessage}`,
-          "To jest mock odpowiedź na: " + userMessage,
-          `Otrzymałem wiadomość: "${userMessage}"`,
+          "Do fotografii nocnej rekomenduje: zwiększ ISO do 3200-6400, otwórz przysłonę na f/2.8 lub szerzej, użyj tripodu. Unikaj autofocusa - przełącz na manual focus.",
+          "Dla kompozycji portretów: stosuj regułę trzeciego, ustaw ostrość na oczy. Preferuję aperturę f/1.8-f/2.8 dla naturalnej głębi. Testuj różne kąty.",
+          "Sprzęt: do krajobrazów rekomenduje obiektyw 16-35mm. Dla portretów - 85mm f/1.8. Zawsze miej filtr ND do filmowania w słoneczne dni.",
+          "Obróbka: w Lightroomie zacznij od balansu bieli, zwiększ kontrast, popracuj nad szczegółami. Unikaj przesadnej nasycenia - naturalne kolory wyglądają najlepiej.",
+          "Fotografia krajobrazowa: wstawaj wcześnie na golden hour (30 min po wschodzie). Używaj tripodu dla ostrości. Композиция: niebo 1/3, ziemia 2/3.",
         ];
 
         const randomIndex = Math.floor(Math.random() * mockResponses.length);
@@ -432,7 +435,7 @@ export const ChatInput = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Wpisz wiadomość... (Shift+Enter = nowa linia)"
+          placeholder="Zapytaj o fotografię... (Shift+Enter = nowa linia)"
           disabled={isLoading}
           className="resize-none"
           rows={1}
@@ -485,9 +488,9 @@ export const ChatWindow = () => {
   return (
     <Card className="flex flex-col h-screen max-h-screen border-0 rounded-none shadow-none bg-gray-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 shadow-md">
-        <h1 className="text-2xl font-bold">Promptly Chat</h1>
-        <p className="text-sm opacity-90">Asystent AI w stylu ChatGPT</p>
+      <div className="bg-gradient-to-r from-amber-600 to-amber-700 text-white p-4 shadow-md">
+        <h1 className="text-2xl font-bold">📸 Promptly Photo</h1>
+        <p className="text-sm opacity-90">AI Expert w Fotografii</p>
       </div>
 
       {/* Messages */}
@@ -601,7 +604,7 @@ body {
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Promptly - AI Chat</title>
+    <title>Promptly Photo - AI Photography Assistant</title>
   </head>
   <body>
     <div id="root"></div>
@@ -855,6 +858,7 @@ npx shadcn-ui@latest add [komponent]
 ### Przyszłość - Sprint 2+
 
 - **Axios**: Zainstalujemy w Sprint 2, gdy będziesz mieć backend
+- **System Prompt**: Backend będzie wysyłać system prompt do OpenAI dla każdego requestu (Photography Expert)
 - **Custom Hooks**: Możemy tworzyć hooki dla logiki biznesowej
 - **React Query / TanStack Query**: Opcjonalnie do zarządzania cache'em API (Sprint 3+)
 - [Zustand Docs](https://github.com/pmndrs/zustand)
