@@ -288,8 +288,8 @@ npm install react-router-dom
 
 ### Sprawdzenie
 
-- [ ] `react-router-dom` zainstalowany w `package.json`
-- [ ] Brak błędów instalacji
+- [x] `react-router-dom` zainstalowany w `package.json`
+- [x] Brak błędów instalacji
 
 ---
 
