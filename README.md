@@ -126,9 +126,9 @@ promptly-photo-ai/
 
 **Efekt końcowy**: Działająca aplikacja React z mockowanym czatem
 
-- [ ] Task 1.1: Inicjalizacja React + Vite (0.5h)
-- [ ] Task 1.2: Instalacja TailwindCSS (0.5h)
-- [ ] Task 1.3: Instalacja Shadcn/ui (0.5h)
+- [x] Task 1.1: Inicjalizacja React + Vite (0.5h)
+- [x] Task 1.2: Instalacja TailwindCSS (0.5h)
+- [x] Task 1.3: Instalacja Shadcn/ui (0.5h)
 - [ ] Task 1.4: Struktura folderów (0.5h)
 - [ ] Task 1.5: Typy TypeScript (`chat.ts`) (0.5h)
 - [ ] Task 1.6: Zustand Store (0.5h)
