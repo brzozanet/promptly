@@ -267,8 +267,8 @@ promptly-photo-ai/
 └── backend/                        (Sprint 2)
 ```
 
-- [ ] Wszystkie foldery utworzone (components/layout, components/chat, pages)
-- [ ] Pliki `ui/` znajdują się w `components/ui/`
+- [x] Wszystkie foldery utworzone (components/layout, components/chat, pages)
+- [x] Pliki `ui/` znajdują się w `components/ui/`
 
 ---
 
