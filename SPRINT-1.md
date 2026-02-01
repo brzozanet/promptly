@@ -320,10 +320,29 @@ export interface ChatState {
 }
 ```
 
+### Strategia System Prompt (MVP vs Phase 4+)
+
+**MVP (Sprint 1-2)**:
+
+- System prompt z instrukcją dla AI ("Jesteś ekspertem fotografii...") jest **hardcoded w backendzie**
+- Frontend **nie widzi** system messages - wysyła tylko user message, otrzymuje assistant response
+- `role` w interfejsie `Message` to tylko `"user" | "assistant"` (bez `"system"`)
+- Prostsze zarządzanie stanem, bezpieczniejsze (prompt nie w kodzie frontendu)
+
+**Phase 4+ (opcjonalnie)**:
+
+- Jeśli system prompt ma być **edytowalny przez użytkownika** lub **widoczny w UI czatu**
+- Dodaj `role: "user" | "assistant" | "system"` do interfejsu `Message`
+- Wyświetlaj system messages jako info box (np. żółte tło, ikona ⚙️)
+- Wymaga rozszerzenia `MessageList` i `Message` komponentów
+
+**Decyzja**: W MVP używamy `"user" | "assistant"` - system prompt pozostaje w backendzie.
+
 ### Sprawdzenie
 
 - [ ] Plik utworzony bez błędów TypeScript
 - [ ] Interfejsy eksportują się prawidłowo
+- [ ] Typy `role` zgodne ze strategią MVP (bez `"system"`)
 
 ---
 
