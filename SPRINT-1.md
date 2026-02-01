@@ -77,12 +77,12 @@ promptly-photo-ai/              ← Główny folder projektu
 
 ### Oczekiwane rezultaty
 
-- [ ] Dev server nasłuchuje na `http://localhost:5173`
-- [ ] Aplikacja wyświetla się w przeglądarce (domyślna strona Vite)
-- [ ] Terminal pokazuje `✓ Local: http://localhost:5173/`
-- [ ] Brak błędów TypeScript/ESLint
-- [ ] Struktura: `promptly-photo-ai/frontend/` ✅
-- [ ] Gotowa na dodanie `promptly-photo-ai/backend/` w Sprint 2 ✅
+- [x] Dev server nasłuchuje na `http://localhost:5173`
+- [x] Aplikacja wyświetla się w przeglądarce (domyślna strona Vite)
+- [x] Terminal pokazuje `✓ Local: http://localhost:5173/`
+- [x] Brak błędów TypeScript/ESLint
+- [x] Struktura: `promptly-photo-ai/frontend/` ✅
+- [x] Gotowa na dodanie `promptly-photo-ai/backend/` w Sprint 2 ✅
 
 ---
 
