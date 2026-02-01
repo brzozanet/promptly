@@ -559,7 +559,7 @@ export function ChatWindow() {
 
   return (
     <Card className="w-full h-screen flex flex-col bg-white">
-      <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4">
+      <div className="bg-linear-to-r from-purple-600 to-blue-600 text-white p-4">
         <h1 className="text-xl font-bold">📸 Promptly Photo - AI Photography Assistant</h1>
         <p className="text-sm opacity-90">Zapytaj o fotografię, kompozycję, sprzęt...</p>
       </div>
