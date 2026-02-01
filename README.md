@@ -59,15 +59,15 @@ W webowej wersji implementujemy to samo w `backend/src/routes/chat.ts`
 
 ## �🛠️ Tech Stack - MVP
 
-| Warstwa             | Technologia                               | Dlaczego?                                   |
-| ------------------- | ----------------------------------------- | ------------------------------------------- |
-| **Frontend**        | React 18 + Vite + TailwindCSS + Shadcn/ui | Szybki dev loop, UI components ready-to-use |
-| **State**           | Zustand                                   | Lekkie, bez boilerplate                     |
-| **Backend**         | Express.js + TypeScript                   | Prosty proxy (1 endpoint), ~100 LOC         |
-| **AI**              | OpenAI API                                | Gotowa, niezawodna integracja               |
-| **DB**              | Brak (Phase 1)                            | MVP bez persystencji                        |
-| **Deployment**      | Vercel (FE) + Render (BE)                 | Free tier, szybki deploy                    |
-| **Version Control** | Git + GitHub                              | Kontrola wersji                             |
+| Warstwa             | Technologia                               | Dlaczego?                                                           |
+| ------------------- | ----------------------------------------- | ------------------------------------------------------------------- |
+| **Frontend**        | React 18 + Vite + TailwindCSS + Shadcn/ui | Szybki dev loop, UI components ready-to-use                         |
+| **State**           | Zustand                                   | Lekkie, bez boilerplate                                             |
+| **Backend**         | Express.js + TypeScript                   | Prosty proxy (1 endpoint), ~100 LOC + **nauka fundamentów backend** |
+| **AI**              | OpenAI API                                | Gotowa, niezawodna integracja                                       |
+| **DB**              | Brak (Phase 1)                            | MVP bez persystencji                                                |
+| **Deployment**      | Vercel (FE) + Render (BE)                 | Free tier, szybki deploy                                            |
+| **Version Control** | Git + GitHub                              | Kontrola wersji                                                     |
 
 ---
 
@@ -348,6 +348,12 @@ W naszym projekcie system prompt definiuje:
 4. **Error Handling**: Graceful error handling z user-friendly komunikatami.
 5. **CORS**: Backend proxy musi mieć poprawnie skonfigurowany CORS dla frontendu.
 6. **Bezpieczeństwo**: API key przechowywany po stronie serwera, nigdy nie trafia do frontendu.
+7. **Express → Next.js Migration Strategy**:
+   - **Phase 1-2**: Express.js + Vite (nauka fundamentów backend, routing, middleware, CORS)
+   - **Phase 3**: Migracja do Next.js (upload zdjęć wymaga Image Optimization, łatwiejsze API Routes)
+   - **Uzasadnienie**: Express = uniwersalna umiejętność (CV value), Next.js = optymalizacja dla produkcji
+   - **Timeline**: Q3 2026 (wraz z implementacją GPT-4 Vision)
+   - **Korzyści migracji**: 1 projekt zamiast 2, automatyczna optymalizacja obrazów, lepsze SEO, scalony deployment
 
 ---
 
@@ -377,6 +383,30 @@ W naszym projekcie system prompt definiuje:
 ### Phase 3: Upload & Ocena Zdjęć (Q3 2026)
 
 **Stack dodatkowy**: GPT-4 Vision API, S3/Cloudinary dla storage
+
+**🔄 MIGRACJA DO NEXT.JS** - Najbardziej sensowny moment:
+
+**Dlaczego teraz?**
+
+- ✅ Nauczyłeś się już Express (fundamenty backend)
+- ✅ Upload zdjęć wymaga lepszej optymalizacji obrazów
+- ✅ Scalenie frontend + backend = prostszy deployment
+- ✅ Przygotowanie pod skalowanie (Phase 4-5)
+
+**Co zyskujesz:**
+
+- **Image Optimization** - Next.js automatycznie kompresuje/konwertuje obrazy (WebP, AVIF)
+- **API Routes** - 1 projekt zamiast 2 (frontend + backend razem)
+- **SSR/SSG** - lepsze SEO dla galerii publicznych (Phase 5)
+- **Performance** - szybsze ładowanie dużych plików
+
+**Effort**: 2-3 dni (przepisanie Express endpoints → Next.js API Routes)
+
+**Decision Matrix**:
+| Faza | Express | Next.js | Status |
+|------|---------|---------|--------|
+| Phase 1-2 | ✅ Idealny (nauka) | ❌ Overkill | **Express** |
+| Phase 3+ | ⚠️ Działa, ale... | ✅ **Lepszy** | **→ Next.js** |
 
 **Features**:
 
