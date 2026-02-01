@@ -176,11 +176,8 @@ Zainstalowanie biblioteki komponentów UI Shadcn (w `frontend/`).
 **Upewnij się, że jesteś w folderze `frontend/`**:
 
 ```bash
-# Zainstaluj shadcn/ui CLI
-npm install -D @shadcn/ui
-
-# Zainicjuj konfigurację
-npx shadcn-ui@latest init
+# Zainstaluj shadcn/ui CLI i zainicjuj konfigurację
+npx shadcn@latest init
 ```
 
 ### Podczas konfiguracji
@@ -194,17 +191,17 @@ Odpowiadaj na pytania:
 ### Instalacja podstawowych komponentów
 
 ```bash
-npx shadcn-ui@latest add button
-npx shadcn-ui@latest add input
-npx shadcn-ui@latest add textarea
-npx shadcn-ui@latest add card
-npx shadcn-ui@latest add scroll-area
+npx shadcn@latest add button
+npx shadcn@latest add input
+npx shadcn@latest add textarea
+npx shadcn@latest add scroll-area
+npx shadcn@latest add spinner
 ```
 
 ### Sprawdzenie
 
-- [ ] Folder `src/components/ui/` istnieje z komponentami
-- [ ] Każdy komponent ma plik `.tsx`
+- [x] Folder `src/components/ui/` istnieje z komponentami
+- [x] Zainstalowane komponenty: button.tsx, input.tsx, textarea.tsx, scroll-area.tsx, spinner.tsx
 
 ---
 
@@ -241,8 +238,8 @@ promptly-photo-ai/
 │   │   │       ├── button.tsx
 │   │   │       ├── input.tsx
 │   │   │       ├── textarea.tsx
-│   │   │       ├── card.tsx
-│   │   │       └── scroll-area.tsx
+│   │   │       ├── scroll-area.tsx
+│   │   │       └── spinner.tsx
 │   │   ├── store/
 │   │   │   └── chatStore.ts        (utworzysz w Task 1.6)
 │   │   ├── types/
