@@ -340,9 +340,9 @@ export interface ChatState {
 
 ### Sprawdzenie
 
-- [ ] Plik utworzony bez błędów TypeScript
-- [ ] Interfejsy eksportują się prawidłowo
-- [ ] Typy `role` zgodne ze strategią MVP (bez `"system"`)
+- [x] Plik utworzony bez błędów TypeScript
+- [x] Interfejsy eksportują się prawidłowo
+- [x] Typy `role` zgodne ze strategią MVP (bez `"system"`)
 
 ---
 
