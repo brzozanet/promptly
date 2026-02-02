@@ -451,10 +451,10 @@ export function Layout() {
 
 ### Sprawdzenie
 
-- [ ] 2 pliki utworzone bez błędów
-- [ ] Header wyświetla logo i menu nawigacyjne
-- [ ] Layout łączy Header + content area
-- [ ] Brak Sidebar (zostanie dodany w Phase 2)
+- [x] 2 pliki utworzone bez błędów
+- [x] Header wyświetla logo i menu nawigacyjne
+- [x] Layout łączy Header + content area
+- [x] Brak Sidebar (zostanie dodany w Phase 2)
 
 ---
 
