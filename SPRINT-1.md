@@ -395,11 +395,11 @@ export const useChatStore = create<ChatState>((set) => ({
 
 ---
 
-## 🎯 Task 1.8: Layout Components (Header, Layout, Sidebar) (0.75h)
+## 🎯 Task 1.8: Layout Components (Header, Layout) (0.5h)
 
 ### Cel
 
-Stworzenie podstawowych komponentów układu strony przypominających ChatGPT.
+Stworzenie podstawowych komponentów układu strony (Header + Layout bez Sidebar). Sidebar dodamy w Phase 2 gdy będzie historia czatów.
 
 ### Plik 1: `frontend/src/components/layout/Header.tsx`
 
@@ -431,44 +431,19 @@ export function Header() {
 }
 ```
 
-### Plik 2: `frontend/src/components/layout/Sidebar.tsx`
-
-```typescript
-export function Sidebar() {
-  return (
-    <aside className="w-64 bg-gray-50 border-r border-gray-200 p-4">
-      <div className="mb-4">
-        <button className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">
-          + Nowa rozmowa
-        </button>
-      </div>
-
-      <div className="text-sm text-gray-500">
-        <p>Historia rozmów</p>
-        <p className="mt-2 text-xs italic">Dostępne w Phase 2</p>
-      </div>
-    </aside>
-  );
-}
-```
-
-### Plik 3: `frontend/src/components/layout/Layout.tsx`
+### Plik 2: `frontend/src/components/layout/Layout.tsx`
 
 ```typescript
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
-import { Sidebar } from './Sidebar';
 
 export function Layout() {
   return (
     <div className="flex flex-col h-screen">
       <Header />
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar />
-        <main className="flex-1 overflow-auto">
-          <Outlet />
-        </main>
-      </div>
+      <main className="flex-1 overflow-auto">
+        <Outlet />
+      </main>
     </div>
   );
 }
@@ -476,10 +451,10 @@ export function Layout() {
 
 ### Sprawdzenie
 
-- [ ] 3 pliki utworzone bez błędów
+- [ ] 2 pliki utworzone bez błędów
 - [ ] Header wyświetla logo i menu nawigacyjne
-- [ ] Sidebar zawiera placeholder "Nowa rozmowa"
-- [ ] Layout łączy Header + Sidebar + content area
+- [ ] Layout łączy Header + content area
+- [ ] Brak Sidebar (zostanie dodany w Phase 2)
 
 ---
 
