@@ -742,10 +742,10 @@ export default App;
 
 ### Sprawdzenie
 
-- [ ] Aplikacja uruchamia się na `localhost:5173`
-- [ ] Widoczne jest okno czatu z headerem
-- [ ] Można wpisywać i "wysyłać" (mockowe) wiadomości
-- [ ] Brak błędów w konsoli
+- [x] Aplikacja uruchamia się na `localhost:5173`
+- [x] Widoczne jest okno czatu z headerem
+- [x] Można wpisywać i "wysyłać" (mockowe) wiadomości
+- [x] Brak błędów w konsoli
 
 ---
 
