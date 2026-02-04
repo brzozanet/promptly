@@ -1,7 +1,7 @@
 export function Footer() {
   return (
     <>
-      <footer className="text-center text-muted-foreground bg-sky-950/50 py-4">
+      <footer className="text-center text-muted-foreground bg-gray-950/50 py-4">
         <p>Asystent AI może popełniać błędy. Sprawdź ważne informacje. </p>
         <p className="text-white">Made with ❤️ by brzoza.net</p>
       </footer>

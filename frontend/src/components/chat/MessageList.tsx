@@ -74,6 +74,22 @@ export function MessageList() {
             timestamp={messageMockup.timestamp}
           />
         </li>
+        <li>
+          <Message
+            id={messageMockup.id}
+            role="user"
+            content={messageMockup.content}
+            timestamp={messageMockup.timestamp}
+          />
+        </li>
+        <li>
+          <Message
+            id={messageMockup.id}
+            role="assistant"
+            content={messageMockup.content}
+            timestamp={messageMockup.timestamp}
+          />
+        </li>
       </ul>
       <div ref={endRef} />
     </>

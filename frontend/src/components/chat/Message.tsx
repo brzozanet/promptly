@@ -1,9 +1,8 @@
 import type { Message } from "@/types/chat";
-// import iconAssitant from "../../assets/icon-assistant.svg";
 import iconPromptly from "../../assets/icon-promptly.svg";
 import iconUser from "../../assets/icon-user.svg";
 
-export function Message({ id, role, content, timestamp }: Message) {
+export function Message({ role, content, timestamp }: Message) {
   const isUser = role === "user";
   const avatar = isUser ? iconUser : iconPromptly;
 
