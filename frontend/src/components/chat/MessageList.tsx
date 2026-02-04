@@ -22,7 +22,10 @@ export function MessageList() {
 
   return (
     <>
-      <ul className="space-y-4 px-4 py-6">
+      <h2 className="text-white text-2xl text-left mb-6">
+        Saepe sit vel iste id est doloribus...
+      </h2>
+      <ul className="space-y-4 px-4 mb-12">
         <li>
           <Message
             id={messageMockup.id}
@@ -67,30 +70,6 @@ export function MessageList() {
           <Message
             id={messageMockup.id}
             role="assistant"
-            content={messageMockup.content}
-            timestamp={messageMockup.timestamp}
-          />
-        </li>
-        <li>
-          <Message
-            id={messageMockup.id}
-            role="user"
-            content={messageMockup.content}
-            timestamp={messageMockup.timestamp}
-          />
-        </li>
-        <li>
-          <Message
-            id={messageMockup.id}
-            role="assistant"
-            content={messageMockup.content}
-            timestamp={messageMockup.timestamp}
-          />
-        </li>
-        <li>
-          <Message
-            id={messageMockup.id}
-            role="user"
             content={messageMockup.content}
             timestamp={messageMockup.timestamp}
           />

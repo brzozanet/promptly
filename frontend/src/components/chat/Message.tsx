@@ -12,14 +12,18 @@ export function Message({ id, role, content, timestamp }: Message) {
       className={`flex items-end gap-2 ${isUser ? "justify-end" : "justify-start"}`}
     >
       {!isUser && (
-        <img src={avatar} alt="assistant" className="h-8 w-8 rounded-full" />
+        <img
+          src={avatar}
+          alt="assistant"
+          className="h-8 w-8 rounded-full invert"
+        />
       )}
 
       <div
         className={`max-w-[75%] rounded-2xl px-4 py-2 text-sm shadow-sm ${
           isUser
-            ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-primary-foreground"
-            : "bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-foreground"
+            ? "bg-linear-to-r from-gray-700 via-gray-600 to-gray-400 text-primary-foreground"
+            : "bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-foreground"
         }`}
       >
         <p className="whitespace-pre-wrap text-left">{content}</p>
@@ -29,7 +33,7 @@ export function Message({ id, role, content, timestamp }: Message) {
       </div>
 
       {isUser && (
-        <img src={avatar} alt="user" className="h-8 w-8 rounded-full" />
+        <img src={avatar} alt="user" className="h-8 w-8 rounded-full invert" />
       )}
     </div>
   );

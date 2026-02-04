@@ -3,7 +3,7 @@ import iconPromptly from "../../assets/icon-promptly.svg";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-80% px-6 py-4 w-full backdrop-blur">
+    <header className="sticky top-0 z-50 mb-12 bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-80% px-6 py-4 w-full backdrop-blur">
       <div className="flex items-center justify-between max-w-5xl mx-auto">
         <div className="flex flex-row gap-3 items-center text-xl font-bold">
           <img src={iconPromptly} className="h-10" />
