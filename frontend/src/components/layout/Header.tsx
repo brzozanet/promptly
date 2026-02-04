@@ -8,13 +8,13 @@ export function Header() {
         <nav className="flex gap-6">
           <ul className="flex flex-row gap-3">
             <li>
+              <NavLink to="#">Nowa rozmowa</NavLink>
+            </li>
+            <li>
               <NavLink to="#">O projekcie</NavLink>
             </li>
             <li>
               <NavLink to="#">Jak to działa?</NavLink>
-            </li>
-            <li>
-              <NavLink to="#">Kontakt</NavLink>
             </li>
           </ul>
         </nav>

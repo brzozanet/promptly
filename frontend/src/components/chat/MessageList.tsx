@@ -1,4 +1,5 @@
-import { ScrollArea } from "../ui/scroll-area";
+// import { ScrollArea } from "../ui/scroll-area";
+import { useEffect, useRef } from "react";
 import { Message } from "./Message";
 
 export function MessageList() {
@@ -8,52 +9,94 @@ export function MessageList() {
     timestamp: "Tue Feb 03 2026 18:18:53",
   };
 
+  const endRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(
+    () => {
+      endRef.current?.scrollIntoView({ behavior: "smooth" });
+    },
+    [
+      // TODO: tutaj dolecowo messages
+    ],
+  );
+
   return (
     <>
-      <ScrollArea className="h-full px-4 py-6 bg-sky-500/10">
-        <ul className="space-y-4">
-          <li>
-            <Message
-              id={messageMockup.id}
-              role="user"
-              content={messageMockup.content}
-              timestamp={messageMockup.timestamp}
-            />
-          </li>
-          <li>
-            <Message
-              id={messageMockup.id}
-              role="assistant"
-              content={messageMockup.content}
-              timestamp={messageMockup.timestamp}
-            />
-          </li>
-          <li>
-            <Message
-              id={messageMockup.id}
-              role="user"
-              content={messageMockup.content}
-              timestamp={messageMockup.timestamp}
-            />
-          </li>
-          <li>
-            <Message
-              id={messageMockup.id}
-              role="assistant"
-              content={messageMockup.content}
-              timestamp={messageMockup.timestamp}
-            />
-          </li>
-          <li>
-            <Message
-              id={messageMockup.id}
-              role="user"
-              content={messageMockup.content}
-              timestamp={messageMockup.timestamp}
-            />
-          </li>
-        </ul>
-      </ScrollArea>
+      <ul className="space-y-4 px-4 py-6">
+        <li>
+          <Message
+            id={messageMockup.id}
+            role="user"
+            content={messageMockup.content}
+            timestamp={messageMockup.timestamp}
+          />
+        </li>
+        <li>
+          <Message
+            id={messageMockup.id}
+            role="assistant"
+            content={messageMockup.content}
+            timestamp={messageMockup.timestamp}
+          />
+        </li>
+        <li>
+          <Message
+            id={messageMockup.id}
+            role="user"
+            content={messageMockup.content}
+            timestamp={messageMockup.timestamp}
+          />
+        </li>
+        <li>
+          <Message
+            id={messageMockup.id}
+            role="assistant"
+            content={messageMockup.content}
+            timestamp={messageMockup.timestamp}
+          />
+        </li>
+        <li>
+          <Message
+            id={messageMockup.id}
+            role="user"
+            content={messageMockup.content}
+            timestamp={messageMockup.timestamp}
+          />
+        </li>
+        <li>
+          <Message
+            id={messageMockup.id}
+            role="assistant"
+            content={messageMockup.content}
+            timestamp={messageMockup.timestamp}
+          />
+        </li>
+        <li>
+          <Message
+            id={messageMockup.id}
+            role="user"
+            content={messageMockup.content}
+            timestamp={messageMockup.timestamp}
+          />
+        </li>
+        <li>
+          <Message
+            id={messageMockup.id}
+            role="assistant"
+            content={messageMockup.content}
+            timestamp={messageMockup.timestamp}
+          />
+        </li>
+        <li>
+          <Message
+            id={messageMockup.id}
+            role="user"
+            content={messageMockup.content}
+            timestamp={messageMockup.timestamp}
+          />
+        </li>
+      </ul>
+      <div ref={endRef} />
     </>
   );
 }
