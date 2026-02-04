@@ -143,7 +143,7 @@ promptly-photo-ai/
 - [x] Task 1.6: Typy TypeScript (`chat.ts`) (0.5h)
 - [x] Task 1.7: Zustand Store (0.5h)
 - [x] Task 1.8: Layout Components (Header, Layout) (0.5h)
-- [ ] Task 1.9: Chat Components - Message & MessageList (0.75h)
+- [x] Task 1.9: Chat Components - Message & MessageList (0.75h)
 - [ ] Task 1.10: Chat Components - ChatInput (0.5h)
 - [ ] Task 1.11: Chat Components - ChatWindow (połączenie wszystkiego) (0.5h)
 - [ ] Task 1.12: Pages (About, How It Works, Contact) (0.75h)
