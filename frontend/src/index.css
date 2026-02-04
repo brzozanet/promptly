@@ -122,15 +122,12 @@
   }
 }
 
-/* ...existing code... */
-
 /* Scrollbar */
 * {
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: #3b3b3b #1c1c1c; /* thumb / track */
 }
 
-/* Chrome/Edge/Safari */
 *::-webkit-scrollbar-track {
   background: #1c1c1c;
 }
