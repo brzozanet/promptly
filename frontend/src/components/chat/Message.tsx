@@ -1,5 +1,6 @@
 import type { Message } from "@/types/chat";
 import iconPromptly from "../../assets/icon-promptly.svg";
+import iconClock8 from "../../assets/icon-clock8.svg";
 import iconUser from "../../assets/icon-user.svg";
 
 export function Message({ role, content, timestamp }: Message) {
@@ -25,12 +26,14 @@ export function Message({ role, content, timestamp }: Message) {
             : "bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-foreground"
         }`}
       >
-        <p className="whitespace-pre-wrap text-left">{content}</p>
-        <p className="mt-2 text-[11px] whitespace-pre-wrap text-left">
-          {timestamp}
-        </p>
+        <p className="whitespace-pre-wrap text-left mb-3">{content}</p>
+        <div className="flex items-center gap-1">
+          <img src={iconClock8} className={`h-4 ${isUser && "invert"}`} />
+          <p className="text-[11px] whitespace-pre-wrap text-left">
+            {timestamp}
+          </p>
+        </div>
       </div>
-
       {isUser && (
         <img src={avatar} alt="user" className="h-8 w-8 rounded-full invert" />
       )}
