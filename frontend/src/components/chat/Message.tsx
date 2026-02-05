@@ -1,9 +1,19 @@
 import type { Message } from "@/types/chat";
+import { Typewriter } from "react-simple-typewriter";
 import iconPromptly from "../../assets/icon-promptly.svg";
 import iconClock8 from "../../assets/icon-clock8.svg";
 import iconUser from "../../assets/icon-user.svg";
 
-export function Message({ role, content, timestamp }: Message) {
+interface MessageProps extends Message {
+  isLastMessage?: boolean;
+}
+
+export function Message({
+  role,
+  content,
+  timestamp,
+  isLastMessage,
+}: MessageProps) {
   const isUser = role === "user";
   const avatar = isUser ? iconUser : iconPromptly;
 
@@ -27,9 +37,19 @@ export function Message({ role, content, timestamp }: Message) {
             : "bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-foreground"
         }`}
       >
-        <p className="whitespace-pre-wrap text-left mb-3 text-base">
-          {content}
-        </p>
+        <div className="whitespace-pre-wrap text-left mb-3 text-base">
+          {!isUser && isLastMessage ? (
+            <Typewriter
+              words={[content]}
+              typeSpeed={10}
+              deleteSpeed={0}
+              loop={1}
+              cursor={false}
+            />
+          ) : (
+            <p>{content}</p>
+          )}
+        </div>
         <div className="flex items-center gap-1">
           <img
             src={iconClock8}
