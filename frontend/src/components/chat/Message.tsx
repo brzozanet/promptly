@@ -15,6 +15,7 @@ export function Message({ role, content, timestamp }: Message) {
         <img
           src={avatar}
           alt="assistant"
+          title="assistant"
           className="h-8 w-8 rounded-full invert"
         />
       )}
@@ -28,14 +29,24 @@ export function Message({ role, content, timestamp }: Message) {
       >
         <p className="whitespace-pre-wrap text-left mb-3">{content}</p>
         <div className="flex items-center gap-1">
-          <img src={iconClock8} className={`h-4 ${isUser && "invert"}`} />
+          <img
+            src={iconClock8}
+            alt="timestamp"
+            title="timestamp"
+            className={`h-4 ${isUser && "invert"}`}
+          />
           <p className="text-[11px] whitespace-pre-wrap text-left">
             {timestamp}
           </p>
         </div>
       </div>
       {isUser && (
-        <img src={avatar} alt="user" className="h-8 w-8 rounded-full invert" />
+        <img
+          src={avatar}
+          alt="user"
+          title="user"
+          className="h-8 w-8 rounded-full invert"
+        />
       )}
     </div>
   );

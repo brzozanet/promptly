@@ -6,7 +6,12 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-80% px-6 py-4 w-full shadow-2xl">
       <div className="flex items-center justify-between max-w-5xl mx-auto">
         <div className="flex flex-row gap-3 items-center text-xl font-bold">
-          <img src={iconPromptly} className="h-10" />
+          <img
+            src={iconPromptly}
+            alt="Promptly"
+            title="Promptly"
+            className="h-10"
+          />
           <div>Promptly Photo AI</div>
         </div>
         <nav>
