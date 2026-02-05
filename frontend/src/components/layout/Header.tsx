@@ -31,7 +31,9 @@ export function Header() {
             title="Promptly"
             className="h-10"
           />
-          <div>Promptly Photo AI</div>
+          <NavLink to="/">
+            <div>Promptly Photo AI</div>
+          </NavLink>
         </div>
         <nav>
           <ul className="flex flex-row gap-6 items-center font-bold">
@@ -70,7 +72,7 @@ export function Header() {
               <NavLink to="#">O projekcie</NavLink>
             </li>
             <li>
-              <NavLink to="#">Jak to działa?</NavLink>
+              <NavLink to="how.html">Jak to działa?</NavLink>
             </li>
           </ul>
         </nav>
