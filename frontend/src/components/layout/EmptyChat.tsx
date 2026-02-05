@@ -1,7 +1,7 @@
 import { Typewriter } from "react-simple-typewriter";
 import { ChatInput } from "../chat/ChatInput";
 
-export function EmptyState() {
+export function EmptyChat() {
   return (
     <div className="mx-auto flex min-h-[calc(90vh-260px)] w-full max-w-5xl flex-col justify-center">
       <h1 className="text-3xl ml-4 text-white text-left mb-6 font-light">

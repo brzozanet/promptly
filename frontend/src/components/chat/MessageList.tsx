@@ -1,8 +1,6 @@
-// import { ScrollArea } from "../ui/scroll-area";
 import { useEffect, useRef } from "react";
 import { Message } from "./Message";
 import { useChatStore } from "@/store/chatStore";
-import { EmptyState } from "../layout/EmptyState";
 
 export function MessageList() {
   const messages = useChatStore((state) => state.messages);
@@ -35,30 +33,22 @@ export function MessageList() {
 
   return (
     <>
-      {messages.length !== 0 ? (
-        // NOTE: ekran czatu
-        <>
-          <h2 className="text-white text-2xl text-left mb-6">
-            {truncateTitleByWords(messages[0]?.content ?? "", 5)}
-          </h2>
-          <ul className="space-y-4 px-4 mb-12">
-            {messages.map((message) => (
-              <li key={message.id}>
-                <Message
-                  id={message.id}
-                  role={message.role}
-                  content={message.content}
-                  timestamp={formatTimestamp(message.timestamp)}
-                />
-              </li>
-            ))}
-          </ul>
-          <div ref={endRef} />
-        </>
-      ) : (
-        // NOTE: ekran początkowy
-        <EmptyState />
-      )}
+      <h2 className="text-white text-2xl text-left mb-6">
+        {truncateTitleByWords(messages[0]?.content ?? "", 5)}
+      </h2>
+      <ul className="space-y-4 px-4 mb-12">
+        {messages.map((message) => (
+          <li key={message.id}>
+            <Message
+              id={message.id}
+              role={message.role}
+              content={message.content}
+              timestamp={formatTimestamp(message.timestamp)}
+            />
+          </li>
+        ))}
+      </ul>
+      <div ref={endRef} />
     </>
   );
 }
