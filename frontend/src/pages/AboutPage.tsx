@@ -25,6 +25,16 @@ export function AboutPage() {
           konkretnie, na temat i z myślą o praktycznym wykorzystaniu w terenie.
         </p>
 
+        <p className="mb-4">
+          🔗{" "}
+          <a
+            href="https://github.com/brzozanet/promptly-photo-ai"
+            target="_blank"
+          >
+            Repozytorium na GitHub
+          </a>
+        </p>
+
         <h3 className="text-2xl mt-6 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mb-4">
           Połączenie technologii i fotografii
         </h3>
