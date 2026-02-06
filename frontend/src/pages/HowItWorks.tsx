@@ -21,7 +21,7 @@ export function HowItWorks() {
 
         <p>Sercem aplikacji jest model LLM, który:</p>
 
-        <ul>
+        <ul className="mb-4 list-disc pl-8">
           <li>
             rozumie język naturalny (piszesz tak, jakbyś rozmawiał z
             człowiekiem),
@@ -30,26 +30,26 @@ export function HowItWorks() {
           <li>generuje odpowiedzi w sposób logiczny, spójny i zrozumiały.</li>
         </ul>
 
-        <p>
+        <p className="mb-4">
           Kluczowe jest jednak to,{" "}
-          <strong>jak ten model jest prowadzony</strong>.
+          <strong>jak ten model jest prowadzony</strong>. Promptly Photo AI
+          działa w oparciu o <strong>system prompt</strong>, czyli zestaw
+          precyzyjnych instrukcji, które nadają modelowi stałą rolę:
         </p>
 
-        <p>
-          Promptly Photo AI działa w oparciu o <strong>system prompt</strong>,
-          czyli zestaw precyzyjnych instrukcji, które nadają modelowi stałą
-          rolę:
-        </p>
-
-        <blockquote>
-          „Odpowiadaj jak instruktor fotografii, mentor i praktyk. Tłumacz
-          prosto, ale merytorycznie. Podawaj przykłady, wskazówki i możliwe
-          warianty rozwiązań.”
+        <blockquote className="relative pl-6 italic mb-4">
+          <span className="absolute -left-4 -top-2 text-6xl text-indigo-200 leading-none">
+            “
+          </span>
+          Odpowiadaj jak instruktor fotografii, mentor i praktyk.
+          <br />
+          Tłumacz prosto, ale merytorycznie. <br />
+          Podawaj przykłady, wskazówki i możliwe warianty rozwiązań.
         </blockquote>
 
         <p>Dzięki temu odpowiedzi są:</p>
 
-        <ul>
+        <ul className="mb-4 list-disc pl-8">
           <li>konkretne,</li>
           <li>oparte na realnej praktyce fotograficznej,</li>
           <li>
@@ -64,7 +64,7 @@ export function HowItWorks() {
 
         <p>Gdy zadasz pytanie, Promptly Photo AI:</p>
 
-        <ol>
+        <ul className="mb-4 list-disc pl-8">
           <li>
             <strong>Analizuje treść zapytania</strong> – np. czy dotyczy
             techniki, kompozycji, sprzętu, obróbki czy konkretnego rodzaju
@@ -78,19 +78,22 @@ export function HowItWorks() {
             <strong>Dobiera styl odpowiedzi</strong> – krótka porada, lista
             kroków, wyjaśnienie „dlaczego”, albo praktyczne tipy z pleneru.
           </li>
-        </ol>
+        </ul>
 
-        <p>
+        <p className="mb-4">
           <strong>Przykład:</strong>
         </p>
 
-        <blockquote>
-          „Jak ustawić aparat do zdjęć nocnych w mieście?”
+        <blockquote className="relative pl-6 italic mb-4">
+          <span className="absolute -left-4 -top-2 text-6xl text-indigo-200 leading-none">
+            “
+          </span>
+          Jak ustawić aparat do zdjęć nocnych w mieście?
         </blockquote>
 
         <p>Asystent nie poda tylko suchych parametrów, ale wyjaśni:</p>
 
-        <ul>
+        <ul className="mb-4 list-disc pl-8">
           <li>dlaczego ISO powinno być niskie,</li>
           <li>kiedy statyw jest niezbędny,</li>
           <li>jak kontrolować światła i prześwietlenia,</li>
@@ -106,7 +109,7 @@ export function HowItWorks() {
           <strong>symulować rozmowę z prowadzącym warsztaty</strong>:
         </p>
 
-        <ul>
+        <ul className="mb-4 list-disc pl-8">
           <li>tłumaczy krok po kroku,</li>
           <li>sugeruje alternatywy („jeśli nie masz statywu…”),</li>
           <li>zwraca uwagę na detale, które robią różnicę,</li>
@@ -124,7 +127,7 @@ export function HowItWorks() {
 
         <p>Asystent radzi m.in. w zakresie:</p>
 
-        <ul>
+        <ul className="mb-4 list-disc pl-8">
           <li>fotografii krajobrazowej i podróżniczej,</li>
           <li>fotografii nocnej i astro,</li>
           <li>portretu i pracy z modelem,</li>
@@ -150,7 +153,7 @@ export function HowItWorks() {
 
         <p>Dzięki system promptowi:</p>
 
-        <ul>
+        <ul className="mb-4 list-disc pl-8">
           <li>
             asystent <strong>nie zgaduje</strong> i nie fantazjuje,
           </li>
@@ -170,7 +173,7 @@ export function HowItWorks() {
 
         <p>Promptly Photo AI jest projektowany jako narzędzie rozwijane:</p>
 
-        <ul>
+        <ul className="mb-4 list-disc pl-8">
           <li>prompt może być rozszerzany o nowe style i scenariusze,</li>
           <li>odpowiedzi są optymalizowane pod realne pytania fotografów,</li>
           <li>
@@ -182,7 +185,7 @@ export function HowItWorks() {
           Promptly Photo AI to:
         </h3>
 
-        <ul>
+        <ul className="mb-4 list-disc pl-8">
           <li>
             AI skonfigurowane jako <strong>instruktor fotografii</strong>,
           </li>
