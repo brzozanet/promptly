@@ -52,14 +52,17 @@ export function Header() {
                       <AlertDialogDescription>
                         Rozpoczęcie nowej rozmowy spowoduje nieodwracalne
                         usunięcie aktualnej. Historia rozmów będzie dostępna w
-                        kolejnej wersji aplikacji 😀
+                        kolejnej wersji aplikacji 😊
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>
+                      <AlertDialogCancel className="cursor-pointer">
                         Wróć do aktualnej rozmowy
                       </AlertDialogCancel>
-                      <AlertDialogAction onClick={handleNewChatButtonClick}>
+                      <AlertDialogAction
+                        onClick={handleNewChatButtonClick}
+                        className="cursor-pointer"
+                      >
                         Tak, zacznij nową rozmowę
                       </AlertDialogAction>
                     </AlertDialogFooter>
