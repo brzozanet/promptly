@@ -1,4 +1,4 @@
-export function HowItWorks() {
+export function HowItWorksPage() {
   return (
     <>
       <div className="mx-auto w-full max-w-5xl py-5 text-white">

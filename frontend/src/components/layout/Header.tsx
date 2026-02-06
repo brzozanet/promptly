@@ -38,7 +38,9 @@ export function Header() {
         </div>
         <nav>
           <ul className="flex flex-row gap-6 items-center font-bold">
-            {messages.length !== 0 && location.pathname !== "/how.html" ? (
+            {messages.length !== 0 &&
+            location.pathname !== "/how.html" &&
+            location.pathname !== "/about.html" ? (
               <li>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
@@ -73,11 +75,12 @@ export function Header() {
               ""
             )}
 
-            {location.pathname === "/how.html" ? (
+            {location.pathname === "/how.html" ||
+            location.pathname === "/about.html" ? (
               <li>
                 <NavLink to="/">
                   <button className="bg-blue-500 shadow-lg shadow-black-500/50 hover:bg-emerald-600 disabled:opacity-50 px-6 py-2 rounded-md font-bold self-end cursor-pointer disabled:cursor-not-allowed text-white text-sm">
-                    Wróć do rozmowy
+                    {messages.length !== 0 ? "Wróć do rozmowy" : "Nowa rozmowa"}
                   </button>
                 </NavLink>
               </li>
@@ -87,14 +90,12 @@ export function Header() {
             <li>
               <NavLink to="how.html">Jak to działa?</NavLink>
             </li>
-            {/* <li>
-              <NavLink to="#">O projekcie</NavLink>
-            </li> */}
+            <li>
+              <NavLink to="about.html">O projekcie</NavLink>
+            </li>
           </ul>
         </nav>
       </div>
     </header>
   );
 }
-
-// TODO: add About page
