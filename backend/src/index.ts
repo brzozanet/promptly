@@ -1,0 +1,41 @@
+import express, { Application } from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import chatRouter from "./routes/chat";
+
+// Załaduj zmienne środowiskowe z .env
+dotenv.config();
+
+const app: Application = express();
+const PORT = process.env.PORT || 3001;
+
+// NOTE: Middleware - funkcje przetwarzające każdy request
+
+// CORS - pozwala frontendowi łączyć się z backendem
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    credentials: true,
+  }),
+);
+
+// JSON Parser - automatycznie parsuje body requestów do JSON
+app.use(express.json());
+
+// NOTE: Routes - definicje endpointów API
+
+// Wszystkie requesty do /api/chat obsługuje chatRouter
+app.use("/api/chat", chatRouter);
+
+// Health check endpoint (sprawdzenie czy serwer działa)
+app.get("/health", (request, response) => {
+  response.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+// NOTE: Start serwera
+
+app.listen(PORT, () => {
+  console.log(`📸 Photography AI Assistant - Backend Ready`);
+  console.log(`🚀 Backend proxy nasłuchuje na http://localhost:${PORT}`);
+  console.log(`🔗 Health check: http://localhost:${PORT}/health`);
+});
