@@ -6,28 +6,32 @@ import dotenv from "dotenv";
 // TODO: delete after integration with index
 dotenv.config();
 
-console.log("chat.ts running...");
+export const chatRouter = Router();
 
-const router = Router();
-
-const client = new OpenAI();
-
-const response = await client.responses.create({
-  model: process.env.OPENAI_MODEL,
-  input: [
-    {
-      role: "user",
-      content:
-        "Test łączenia z API OpenAI, odpisz czy response dotarł i czy działa. Odpisz w języku polskim, w gwarze śląskiej, w żartobliwym stylu",
-    },
-    {
-      role: "system",
-      content: `${process.env.SYSTEM_PROMPT}`,
-    },
-  ],
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
-console.log(response.output_text);
+chatRouter.post("/", async (req, res) => {
+  const { message, previousResponseId } = req.body;
+  console.log(message);
+
+  const response = await client.responses.create({
+    model: process.env.OPENAI_MODEL,
+    input: [
+      {
+        role: "user",
+        content: message,
+      },
+      {
+        role: "system",
+        content: `${process.env.SYSTEM_PROMPT}`,
+      },
+    ],
+  });
+
+  res.send(response.output_text);
+});
 
 //
 //
