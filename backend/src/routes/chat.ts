@@ -51,42 +51,28 @@ chatRouter.post("/", async (request: Request, response: Response) => {
 
     return response.json(chatResponse);
   } catch (error) {
-    return response
-      .status(500)
-      .json({ error: "Server crashed succesfully 😵‍💫" } as ErrorResponse);
+    if (typeof error === "object" && error !== null && "status" in error) {
+    // NOTE: Różne typy błędów OpenAI
+        if (error.status === 401) {
+          return response.status(401).json({
+            error: "Invalid OpenAI API key",
+            details: "Check OPENAI_API_KEY in .env",
+          } as ErrorResponse);
+        }
+        if (error.status === 429) {
+          return response.status(429).json({
+            error: "Rate limit exceeded",
+            details: "Too many requests. Try again later.",
+          } as ErrorResponse);
+        }
+        return response.status(500).json({
+          error: "Server crashed succesfully 😵‍💫",
+          details: "OpenAI API is temporarily unavailable"
+        } as ErrorResponse);
+
+      }
+
+      }
   }
 });
 
-// TODO: Error handling
-
-//   } catch (error: any) {
-//     console.error("❌ Błąd OpenAI API:", error);
-
-//     // Różne typy błędów OpenAI
-//     if (error.status === 401) {
-//       return res.status(401).json({
-//         error: "Invalid OpenAI API key",
-//         details: "Check OPENAI_API_KEY in .env",
-//       } as ErrorResponse);
-//     }
-
-//     if (error.status === 429) {
-//       return res.status(429).json({
-//         error: "Rate limit exceeded",
-//         details: "Too many requests. Try again later.",
-//       } as ErrorResponse);
-//     }
-
-//     if (error.status === 500) {
-//       return res.status(500).json({
-//         error: "OpenAI server error",
-//         details: "OpenAI API is temporarily unavailable",
-//       } as ErrorResponse);
-//     }
-
-//     // Ogólny błąd
-//     return res.status(500).json({
-//       error: "Failed to process chat request",
-//       details: error.message,
-//     } as ErrorResponse);
-//   }
