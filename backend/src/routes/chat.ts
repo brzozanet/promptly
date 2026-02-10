@@ -14,8 +14,17 @@ const client = new OpenAI();
 
 const response = await client.responses.create({
   model: process.env.OPENAI_MODEL,
-  input:
-    "Test łączenia z API OpenAI, odpisz czy response dotarł i czy działa. Odpisz w języku polskim, w gwarze śląskiej, w żartobliwym stylu",
+  input: [
+    {
+      role: "user",
+      content:
+        "Test łączenia z API OpenAI, odpisz czy response dotarł i czy działa. Odpisz w języku polskim, w gwarze śląskiej, w żartobliwym stylu",
+    },
+    {
+      role: "system",
+      content: `${process.env.SYSTEM_PROMPT}`,
+    },
+  ],
 });
 
 console.log(response.output_text);
