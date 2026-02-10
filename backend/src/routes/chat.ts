@@ -49,7 +49,7 @@ chatRouter.post("/", async (request: Request, response: Response) => {
       timestamp: new Date().toISOString(),
     };
 
-    response.send(chatResponse);
+    return response.json(chatResponse);
   } catch (error) {
     return response
       .status(500)
