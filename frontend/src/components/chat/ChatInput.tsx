@@ -24,6 +24,7 @@ export function ChatInput() {
     fakeAssistantReply();
   };
 
+  // TODO: delete after integration with OennAI API
   const fakeAssistantReply = () => {
     setTimeout(() => {
       addMessage({
