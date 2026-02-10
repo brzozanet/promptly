@@ -177,17 +177,17 @@ promptly-photo-ai/
 
 ---
 
-### Sprint 3: Integracja & Deploy (1 dzień) 👉 [SPRINT-3.md](./SPRINT-3.md) _(do utworzenia)_
+### Sprint 3: Integracja & Deploy (1 dzień) 👉 [SPRINT-3.md](./SPRINT-3.md)
 
 **Efekt końcowy**: Działająca aplikacja na produkcji (Vercel + Render)
 
-- [ ] Task 3.1: Podłączenie Frontend → Backend (chatService.ts) (1h)
-- [ ] Task 3.2: Testowanie flow'u lokalnie (0.5h)
-- [ ] Task 3.3: UX improvements (loading states, error messages) (1h)
-- [ ] Task 3.4: Deploy Frontend na Vercel (0.5h)
-- [ ] Task 3.5: Konfiguracja environment variables produkcji (0.25h)
-- [ ] Task 3.6: End-to-end testing produkcji (0.5h)
-- [ ] Task 3.7: Final polish (favicon, meta tags, README update) (0.5h)
+- [ ] Task 3.1: Podłączenie Frontend → Backend (`chatService.ts`)
+- [ ] Task 3.2: Testowanie flow'u lokalnie
+- [ ] Task 3.3: UX improvements (loading states, error messages)
+- [ ] Task 3.4: Deploy Frontend na Vercel
+- [ ] Task 3.5: Konfiguracja environment variables produkcji
+- [ ] Task 3.6: End-to-end testing produkcji
+- [ ] Task 3.7: Final polish (favicon, meta tags, README update)
 
 **Output**: 🚀 **MVP ONLINE** - Promptly Photo AI dostępna publicznie
 
