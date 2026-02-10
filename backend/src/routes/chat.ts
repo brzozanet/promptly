@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { ChatRequest, ChatResponse, ErrorResponse } from "../types/chat";
+import { ChatRequest, ChatResponse, ErrorResponse } from "../types/chat.js";
 import OpenAI from "openai";
 import dotenv from "dotenv";
 

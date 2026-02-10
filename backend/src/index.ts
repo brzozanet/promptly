@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import chalk from "chalk";
-import { chatRouter } from "./routes/chat";
+import { chatRouter } from "./routes/chat.js";
 
 dotenv.config();
 
