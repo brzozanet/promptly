@@ -96,9 +96,22 @@ Poprawić doświadczenie użytkownika: spinner, komunikaty o błędach, responsy
 
 ### Checklist
 
-- [ ] Informacja o ładowaniu widoczna
-- [ ] Błędy są czytelne
-- [ ] UI jest responsywny
+## 🎯 Task 3.4: Zapisywanie stanu do localStorage
+
+### Cel
+
+Utrzymać stan czatu (wiadomości, input) między odświeżeniami/przeładowaniami strony.
+
+### Kroki
+
+1. W pliku `frontend/src/store/chatStore.ts` dodaj zapisywanie stanu (np. tablicy wiadomości) do localStorage przy każdej zmianie.
+2. Przy starcie aplikacji odczytaj stan z localStorage i ustaw jako initial state.
+3. Przetestuj czy po odświeżeniu czat zachowuje historię.
+
+### Checklist
+
+- [ ] Stan czatu zapisuje się do localStorage
+- [ ] Po odświeżeniu czat ładuje poprzedni stan
 
 ---
 
