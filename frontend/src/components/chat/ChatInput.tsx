@@ -5,6 +5,7 @@ import { Textarea } from "../ui/textarea";
 import { useChatStore } from "@/store/chatStore";
 import { nanoid } from "nanoid";
 import { askAI } from "@/services/chatService";
+import { ThreeCircles } from "react-loader-spinner";
 
 export function ChatInput() {
   const [input, setInput] = useState<string>("");
@@ -67,7 +68,22 @@ export function ChatInput() {
 
   return (
     <>
-      {isLoading && "🕗🕗🕗"}
+      {isLoading && (
+        <div className="flex justify-center items-center py-4">
+          <ThreeCircles
+            visible={true}
+            height="150"
+            width="150"
+            color="#4fa94d"
+            outerCircleColor="#10B981"
+            middleCircleColor="#0EA5E9"
+            innerCircleColor="#6366F1"
+            ariaLabel="three-circles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
+      )}
       <form className="p-4 flex gap-2" onSubmit={sendPrompt}>
         <Textarea
           className="min-h-30 resize-none backdrop-blur text-white text-lg! md:text-lg! placeholder:text-lg"

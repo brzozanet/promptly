@@ -52,3 +52,9 @@ export function MessageList() {
     </>
   );
 }
+
+// TODO:
+// Zrób funkcję, która:
+// 1. rozbije tekst np. const parts = message.content.split("fotowarsztaty.com");
+// 2. wyrenderuje parts[0], potem <a href="https://fotowarsztaty.com" target="_blank" rel="noreferrer">fotowarsztaty.com</a>, a potem parts[1].
+// W ten sposób fragment fotowarsztaty.com w tekście zostanie zastąpiony komponentem <a>, a reszta treści pozostanie niezmieniona.

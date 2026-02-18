@@ -1,4 +1,5 @@
 import type { Message } from "@/types/chat";
+import ReactMarkdown from "react-markdown";
 import iconPromptly from "../../assets/icon-promptly.svg";
 import iconClock8 from "../../assets/icon-clock8.svg";
 import iconUser from "../../assets/icon-user.svg";
@@ -27,9 +28,27 @@ export function Message({ role, content, timestamp }: Message) {
             : "bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-foreground"
         }`}
       >
-        <p className="whitespace-pre-wrap text-left mb-3 text-base">
-          {content}
-        </p>
+        <div className="text-left text-[16px] mb-3">
+          <ReactMarkdown
+            components={{
+              p: ({ children }) => <p className="mb-3">{children}</p>,
+              strong: ({ children }) => (
+                <strong className="font-bold">{children}</strong>
+              ),
+              h3: ({ children }) => (
+                <h3 className="text-2xl font-bold mt-3 mb-1">{children}</h3>
+              ),
+              ul: ({ children }) => (
+                <ul className="list-disc pl-5 space-y-1 mb-3">{children}</ul>
+              ),
+              li: ({ children }) => (
+                <li className="leading-relaxed">{children}</li>
+              ),
+            }}
+          >
+            {content}
+          </ReactMarkdown>
+        </div>
         <div className="flex items-center gap-1">
           <img
             src={iconClock8}
@@ -53,3 +72,9 @@ export function Message({ role, content, timestamp }: Message) {
     </div>
   );
 }
+
+// TODO:
+// Zrób funkcję, która:
+// 1. rozbije tekst np. const parts = message.content.split("fotowarsztaty.com");
+// 2. wyrenderuje parts[0], potem <a href="https://fotowarsztaty.com" target="_blank" rel="noreferrer">fotowarsztaty.com</a>, a potem parts[1].
+// W ten sposób fragment fotowarsztaty.com w tekście zostanie zastąpiony komponentem <a>, a reszta treści pozostanie niezmieniona.
