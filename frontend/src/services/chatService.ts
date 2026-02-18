@@ -39,10 +39,6 @@ export async function askAI(
     }
     // Parsuj JSON response
     const answerAI: ChatResponse = await response.json();
-
-    // Wypisz odpowiedź w konsoli
-    console.log("[chatService] backend response:", answerAI);
-
     return answerAI;
   } catch (error) {
     console.error("[chatService] błąd:", error);
