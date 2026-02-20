@@ -42,14 +42,12 @@ export function ChatInput() {
       setError(true);
       console.error("[ChatInput] błąd:", error);
       throw new Error(
-        "Nie można połączyć z serwerem. Sprawdź czy asasa działa.",
+        "Nie można połączyć z serwerem. Sprawdź czy backend działa.",
       );
     } finally {
       setIsLoading(false);
     }
   };
-
-  console.log(error);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter") {
