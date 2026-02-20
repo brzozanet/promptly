@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import bgImage from "../../assets/bg-photo-dark.jpg";
+// import bgImage from "../../assets/bg-photo.jpg";
+import bgImage from "../../assets/bg-drawing.jpg";
 
 export function Layout() {
   return (

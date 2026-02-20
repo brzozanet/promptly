@@ -28,7 +28,7 @@ export function Message({ role, content, timestamp }: Message) {
             : "bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-foreground"
         }`}
       >
-        <div className="text-left text-[16px] mb-3">
+        <div className="text-left text-[16px] mb-3 mt-1">
           <ReactMarkdown
             components={{
               p: ({ children }) => <p className="mb-3">{children}</p>,
