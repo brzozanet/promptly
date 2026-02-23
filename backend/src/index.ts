@@ -20,7 +20,7 @@ const PORT = process.env.PORT || "3001";
 
 app.use(
   cors({
-    origin: "https://promptly-photo-ai.vercel.app/",
+    origin: "https://promptly-photo-ai.vercel.app",
     credentials: true,
   }),
 );
