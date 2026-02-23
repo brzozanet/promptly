@@ -33,7 +33,7 @@ app.use("/api/chat", chatRouter);
 
 app.get("/health", (request, response) => {
   response.json({
-    status: "Backend server status OK",
+    status: "Backend server status OK 🤖",
     timestamp: new Date().toISOString(),
   });
 });
