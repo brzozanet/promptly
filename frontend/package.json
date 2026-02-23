@@ -50,6 +50,8 @@
     "@rollup/rollup-linux-x64-gnu": "*",
     "@rollup/rollup-linux-x64-musl": "*",
     "lightningcss-linux-x64-gnu": "*",
-    "lightningcss-linux-x64-musl": "*"
+    "lightningcss-linux-x64-musl": "*",
+    "@tailwindcss/oxide-linux-x64-gnu": "*",
+    "@tailwindcss/oxide-linux-x64-musl": "*"
   }
 }
