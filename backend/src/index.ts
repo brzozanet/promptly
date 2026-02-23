@@ -12,13 +12,33 @@ const PORT = process.env.PORT || "3001";
 // NOTE: Middleware - funkcje przetwarzające każdy request
 
 // CORS - pozwala frontendowi łączyć się z backendemeem
-const allowedOrigins = process.env.FRONTEND_URL
-  ? process.env.FRONTEND_URL.split(",")
-  : ["http://localhost:3000"];
+const normalizeOrigin = (origin: string) => origin.trim().replace(/\/$/, "");
+
+const allowedOrigins = (
+  process.env.FRONTEND_URL
+    ? process.env.FRONTEND_URL.split(",")
+    : ["http://localhost:3000"]
+)
+  .map(normalizeOrigin)
+  .filter(Boolean);
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      const normalizedOrigin = normalizeOrigin(origin);
+
+      if (allowedOrigins.includes(normalizedOrigin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
     credentials: true,
   }),
 );
