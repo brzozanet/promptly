@@ -594,7 +594,7 @@ export function ChatWindow() {
   return (
     <div className="flex flex-col h-full bg-white">
       {/* Header czatu */}
-      <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4">
+      <div className="bg-linear-to-r from-purple-600 to-blue-600 text-white p-4">
         <h1 className="text-xl font-bold">📸 Promptly Photo AI</h1>
         <p className="text-sm opacity-90">Zapytaj o fotografię, kompozycję, sprzęt...</p>
       </div>
@@ -643,7 +643,7 @@ export function ChatWindow() {
 
 ```typescript
 {/* Header czatu z Clear Button */}
-<div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4">
+<div className="bg-linear-to-r from-purple-600 to-blue-600 text-white p-4">
   <div className="flex items-center justify-between">
     <div>
       <h1 className="text-xl font-bold">📸 Promptly Photo AI</h1>
@@ -1543,7 +1543,7 @@ Vercel automatycznie zrobi redeploy frontendu (1-2 minuty).
 
 **Sprint Leader**: [Twoje imię]  
 **Data rozpoczęcia**: 11.02.2026  
-**Data zakończenia**: ****\_\_\_****  
+**Data zakończenia**: \***\*\_\_\_\*\***  
 **Status**: 🟡 W trakcie / ✅ Ukończony
 
 **Commit message po zakończeniu**:
