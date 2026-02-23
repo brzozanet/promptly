@@ -283,13 +283,13 @@ Otwórz **[http://localhost:5173](http://localhost:5173)** w przeglądarce.
 
 ## 📈 Fazy rozwoju
 
-| Faza | Cel | Status | Timeframe |
-|------|-----|--------|-----------|
-| **Phase 1 (MVP)** | Czat z AI + deploy na produkcję | ✅ Ukończona | Q1 2026 |
-| **Phase 2** | Konta użytkowników, historia chatów, wiele rozmów | 📅 Planowana | Q2 2026 |
-| **Phase 3** | Upload zdjęć + ocena przez AI (GPT-4 Vision) | 📅 Planowana | Q3 2026 |
-| **Phase 4** | Edycja zdjęć przez AI (komendy tekstowe → DALL-E) | 📅 Planowana | Q4 2026+ |
-| **Phase 5** | Społeczność & portfolio fotograficzne | 📅 Planowana | 2027+ |
+| Faza              | Cel                                               | Status       | Timeframe |
+| ----------------- | ------------------------------------------------- | ------------ | --------- |
+| **Phase 1 (MVP)** | Czat z AI + deploy na produkcję                   | ✅ Ukończona | Q1 2026   |
+| **Phase 2**       | Konta użytkowników, historia chatów, wiele rozmów | 📅 Planowana | Q2 2026   |
+| **Phase 3**       | Upload zdjęć + ocena przez AI (GPT-4 Vision)      | 📅 Planowana | Q3 2026   |
+| **Phase 4**       | Edycja zdjęć przez AI (komendy tekstowe → DALL-E) | 📅 Planowana | Q4 2026+  |
+| **Phase 5**       | Społeczność & portfolio fotograficzne             | 📅 Planowana | 2027+     |
 
 ---
 
@@ -340,3 +340,7 @@ Otwórz **[http://localhost:5173](http://localhost:5173)** w przeglądarce.
 **Status**: ✅ Phase 1 MVP — aplikacja działa na produkcji  
 **Live demo**: [https://promptly-photo-ai.vercel.app](https://promptly-photo-ai.vercel.app)  
 **Ostatnia aktualizacja**: 23.02.2026
+
+<br>
+
+![Screenshot App](https://raw.githubusercontent.com/brzozanet/promptly-photo-ai/refs/heads/main/frontend/public/images/gh-cover-promptly-v1.png)
