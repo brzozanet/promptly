@@ -13,7 +13,7 @@ W Sprint 3 **łączymy wszystko w całość** i **wdrażamy na produkcję**. Po 
 
 **Na koniec Sprint 3 powinieneś mieć**:
 
-- ✅ Frontend komunikuje się z backendem (rzeczywiste odpowiedzi AI, nie mockowane)
+- ✅ Frontend komunikuje się z backendem (rzeczywiste odpowiedzi AI, nie mockowane).
 - ✅ Historia rozmowy zapisuje się w localStorage (przetrwa refresh)
 - ✅ Loading states, error handling, przyciski Clear Chat
 - ✅ Backend wdrożony na Render (dostępny online)
