@@ -195,14 +195,14 @@ GET /health
 OPENAI_API_KEY=your_openai_api_key_here
 OPENAI_MODEL=gpt-4o-mini
 PORT=3001
-FRONTEND_URL=http://localhost:5173
+FRONTEND_URL=http://localhost:3000
 SYSTEM_PROMPT=Jesteś ekspertem w fotografii...
 ```
 
 ### Frontend (`frontend/.env.local`)
 
 ```env
-VITE_API_URL=http://localhost:3001
+VITE_API_URL=http://localhost:3000
 ```
 
 ---
@@ -263,7 +263,7 @@ npm run dev
 # Nasłuchuje na http://localhost:5173
 ```
 
-Otwórz **[http://localhost:5173](http://localhost:5173)** w przeglądarce.
+Otwórz **[http://localhost:3000](http://localhost:3000)** w przeglądarce.
 
 ---
 
@@ -320,20 +320,6 @@ Otwórz **[http://localhost:5173](http://localhost:5173)** w przeglądarce.
 - Galeria publiczna zdjęć użytkowników
 - Komentarze i oceny społeczności
 - Portfolio fotograficzne dla każdego użytkownika
-
----
-
-## 📖 Przydatne zasoby
-
-- [OpenAI API Docs](https://platform.openai.com/docs)
-- [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses)
-- [React Documentation](https://react.dev)
-- [Express.js Guide](https://expressjs.com)
-- [TailwindCSS](https://tailwindcss.com)
-- [Shadcn/ui Components](https://ui.shadcn.com)
-- [Zustand State Management](https://github.com/pmndrs/zustand)
-- [Vercel Deployment](https://vercel.com/docs)
-- [Render Deployment](https://render.com/docs)
 
 ---
 
