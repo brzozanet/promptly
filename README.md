@@ -1,491 +1,333 @@
-# Promptly Photo - AI Photography Assistant
+# 📸 Promptly Photo — AI Photography Assistant
 
-## 📋 Opis Projektu
+### Inteligentny asystent fotograficzny oparty na OpenAI
 
-Promptly Photo to **aplikacja webowa z AI asystentem** specjalizującym się w **fotografii**. Asystent udziela porad na temat techniki fotograficznej, kompozycji, wyboru sprzętu, obróbki zdjęć i fotografii specjalistycznej.
+Promptly Photo to **aplikacja webowa z AI asystentem** specjalizującym się w **fotografii**. Asystent udziela porad na temat techniki fotograficznej, kompozycji, wyboru sprzętu, obróbki zdjęć i fotografii specjalistycznej, a na końcu każdej odpowiedzi zaprasza na warsztaty: [fotowarsztaty.com](https://fotowarsztaty.com).
 
-**Geneza**: Projekt bazuje na prostej implementacji czatu AI w terminalu ([example.ts](./example.ts)), która wykorzystuje OpenAI API z zachowaniem historii rozmowy (`previous_response_id`). Celem jest transformacja tego rozwiązania w pełnoprawną aplikację webową.
+**Geneza**: Projekt bazuje na prostej implementacji czatu AI w terminalu ([example.ts](./example.ts)), która wykorzystuje OpenAI API z zachowaniem historii rozmowy (`previous_response_id`). Celem była transformacja tego rozwiązania w pełnoprawne MVP webowe.
 
-**Cel**: Szybkie stworzenie MVP (2-3 tygodnie), potem iteracyjna rozbudowa o nowe feature'y.
+**Cel**: Szybkie stworzenie działającego MVP (czat + deploy), następnie iteracyjna rozbudowa o nowe feature'y.
 
-**Zastosowanie**: Projekt portfolio dla programisty - demonstracja umiejętności: React, TypeScript, API integration, deployment, UI/UX.
-
-### Fazy Rozwoju
-
-| Faza              | Cel                                               | Timeframe    |
-| ----------------- | ------------------------------------------------- | ------------ |
-| **Phase 1 (MVP)** | Czat z AI + wdrożenie na produkcję                | 2-3 tygodnie |
-| **Phase 2**       | Konta użytkowników, historia chatów, wiele rozmów | Q2 2026      |
-| **Phase 3**       | Upload zdjęć + ocena przez AI (GPT-4 Vision)      | Q3 2026      |
-| **Phase 4**       | Edycja zdjęć przez AI (komendy tekstowe → DALL-E) | Q4 2026+     |
-
-**Roadmap szczegółowy**:
-
-- ✅ **Phase 1**: Podstawowy czat tekstowy, system prompt fotograficzny, deploy
-- 🔄 **Phase 2**: Autentykacja, persystencja rozmów, wiele chatów użytkownika
-- 🔜 **Phase 3**: Użytkownik uploaduje zdjęcie → AI analizuje i ocenia (kompozycja, ekspozycja, błędy)
-- 🔜 **Phase 4**: Użytkownik podaje komendy tekstowe → AI edytuje zdjęcie (usuń obiekt, dodaj element, popraw kolory)
+**Zastosowanie**: Projekt portfolio — demonstracja umiejętności: React, TypeScript, Express.js, OpenAI API integration, deployment (Vercel + Render), UI/UX.
 
 ---
 
-## � Od Terminal CLI do Web App
+## 🌐 Demo
 
-**example.ts (Terminal)** → **Promptly Photo (Web)**
+### 🚀 Wersja online
 
-| Aspekt            | example.ts (Terminal)  | Promptly Photo (Web)                                          |
-| ----------------- | ---------------------- | ------------------------------------------------------------- |
-| **Interface**     | CLI (readline)         | React UI (Shadcn/ui)                                          |
-| **Historia**      | `previous_response_id` | Zustand store + API                                           |
-| **Model**         | `gpt-5-nano`           | `gpt-4`, `gpt-4o`                                             |
-| **System Prompt** | Brak                   | Photography Expert                                            |
-| **Deployment**    | Lokalnie (Node.js)     | Vercel (FE) + Render (BE)                                     |
-| **Użytkownicy**   | 1 sesja                | Multi-user (Phase 2+)                                         |
-| **Persystencja**  | Brak                   | Phase 1: localStorage (aktywny czat), Phase 2+: DB (historia) |
+Aplikacja jest dostępna online pod adresem:
 
-**Kluczowa koncepcja z example.ts**:
+👉 [https://promptly-photo-ai.vercel.app](https://promptly-photo-ai.vercel.app)
+
+Platformy:
+
+- **Frontend**: [Vercel](https://vercel.com/) — hosting React / Vite
+- **Backend**: [Render](https://render.com/) — hosting Express.js API
+
+> ⚠️ **Cold Start**: Przy pierwszym uruchomieniu (lub po dłuższym czasie bezczynności) backend może się budzić przez 15–30 sekund — to normalne zjawisko na darmowych planach Render. Odczekaj chwilę i odeślij pytanie ponownie.
+
+### 📦 Architektura
+
+Aplikacja składa się z dwóch części:
+
+- **Frontend**: React + Vite — hostowany na Vercel
+- **Backend**: Express.js (proxy do OpenAI API) — hostowany na Render
+
+---
+
+## 💡 Jak działa asystent?
+
+### OpenAI Responses API
+
+Backend komunikuje się z OpenAI poprzez endpoint `/api/chat`. Kluczową cechą jest zachowanie historii rozmowy dzięki `previous_response_id`:
 
 ```typescript
-// Zachowanie historii rozmowy - to samo podejście w web app
-const response = await client.responses.create({
-  model: "gpt-4",
-  input: userInput,
-  previous_response_id: previousResponseId, // 👈 Klucz do kontekstu
+const chatRequest = await client.responses.create({
+  model: process.env.OPENAI_MODEL,
+  previous_response_id: previousResponseId, // historia rozmowy
+  input: [
+    { role: "user", content: message },
+    { role: "system", content: SYSTEM_PROMPT },
+  ],
 });
 ```
 
-W webowej wersji implementujemy to samo w `backend/src/routes/chat.ts`
+Każda odpowiedź OpenAI zwraca unikalne `id`, które frontend zapisuje w Zustand store i przekazuje w kolejnym requeście. Dzięki temu model „pamięta" kontekst całej rozmowy bez przesyłania pełnej historii.
+
+### System Prompt
+
+System prompt to „instrukcja" dla modelu AI ustawiająca jego osobowość i zachowanie. Konfigurowany jest w zmiennej środowiskowej `SYSTEM_PROMPT` po stronie backendu.
+
+Asystent działa jako **ekspert fotografii z 20+ latami doświadczenia**:
+
+- Odpowiada na pytania o technikę (ekspozycja, przesłona, ISO, ogniskowa)
+- Pomaga w kompozycji i estetyce zdjęć
+- Doradza w wyborze sprzętu (aparaty, obiektywy, oświetlenie)
+- Wyjaśnia obróbkę zdjęć (Lightroom, Photoshop, RawTherapee)
+- Dostosowuje poziom odpowiedzi do początkujących i zaawansowanych
+- Na końcu każdej odpowiedzi zaprasza na tematyczne warsztaty: [fotowarsztaty.com](https://fotowarsztaty.com)
 
 ---
 
-## �🛠️ Tech Stack - MVP
+## 🛠 Tech Stack
 
-| Warstwa             | Technologia                               | Dlaczego?                                                           |
-| ------------------- | ----------------------------------------- | ------------------------------------------------------------------- |
-| **Frontend**        | React 18 + Vite + TailwindCSS + Shadcn/ui | Szybki dev loop, UI components ready-to-use                         |
-| **State**           | Zustand                                   | Lekkie, bez boilerplate                                             |
-| **Backend**         | Express.js + TypeScript                   | Prosty proxy (1 endpoint), ~100 LOC + **nauka fundamentów backend** |
-| **AI**              | OpenAI API                                | Gotowa, niezawodna integracja                                       |
-| **DB**              | Brak (Phase 1)                            | MVP bez persystencji                                                |
-| **Deployment**      | Vercel (FE) + Render (BE)                 | Free tier, szybki deploy                                            |
-| **Version Control** | Git + GitHub                              | Kontrola wersji                                                     |
+### Frontend
+
+- **React 19** + **Vite** — framework i bundler
+- **TypeScript** — pełne typowanie
+- **TailwindCSS v4** — stylowanie
+- **Shadcn/ui** + **Radix UI** — komponenty UI
+- **Zustand** + `persist` middleware — zarządzanie stanem + localStorage
+- **React Router DOM v7** — routing
+- **react-markdown** — renderowanie odpowiedzi AI jako Markdown
+- **nanoid** — generowanie unikalnych ID wiadomości
+- **lucide-react** — ikony
+
+### Backend
+
+- **Express.js v5** + **TypeScript** — serwer proxy
+- **OpenAI SDK** — integracja z OpenAI Responses API
+- **cors** — konfiguracja CORS (Vercel ↔ Render)
+- **dotenv** — zmienne środowiskowe
+- **chalk** — kolorowe logi w terminalu
+- **tsx** + **nodemon** — narzędzia deweloperskie
+
+### Narzędzia
+
+- **Git & GitHub** — kontrola wersji
+- **Vercel** — CI/CD i hosting frontend
+- **Render** — hosting backend
 
 ---
 
-## 📁 Struktura Projektu
+## 📂 Struktura projektu
 
 ```
 promptly-photo-ai/
-├── frontend/                 # Aplikacja React (Vite)
+├── frontend/                        # Aplikacja React (Vite)
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── layout/
-│   │   │   │   ├── Header.tsx         (logo + navigation menu)
-│   │   │   │   └── Layout.tsx         (wrapper całej aplikacji)
+│   │   │   │   ├── Header.tsx          # Logo + nawigacja
+│   │   │   │   ├── Footer.tsx          # Stopka
+│   │   │   │   ├── Layout.tsx          # Wrapper całej aplikacji
+│   │   │   │   ├── ChatWindow.tsx      # Kontener: MessageList + ChatInput
+│   │   │   │   └── EmptyChat.tsx       # Widok pustego czatu
 │   │   │   ├── chat/
-│   │   │   │   ├── ChatWindow.tsx     (kontener: łączy MessageList + ChatInput)
-│   │   │   │   ├── MessageList.tsx    (scroll area z listą Message)
-│   │   │   │   ├── Message.tsx        (pojedynczy bąbelek wiadomości)
-│   │   │   │   └── ChatInput.tsx      (textarea + button wyślij)
-│   │   │   └── ui/
-│   │   │       └── (komponenty shadcn/ui - auto-generated)
+│   │   │   │   ├── ChatInput.tsx       # Textarea + przycisk wyślij
+│   │   │   │   ├── Message.tsx         # Pojedynczy bąbelek wiadomości (Markdown)
+│   │   │   │   └── MessageList.tsx     # Lista wiadomości + auto-scroll
+│   │   │   └── ui/                 # Komponenty Shadcn/ui
 │   │   ├── pages/
-│   │   │   ├── HomePage.tsx       (główna strona z czatem)
-│   │   │   ├── AboutPage.tsx      (/about)
-│   │   │   ├── HowItWorksPage.tsx (/how-it-works)
-│   │   │   └── ContactPage.tsx    (/contact)
-│   │   ├── store/
-│   │   │   └── chatStore.ts (Zustand)
-│   │   ├── types/
-│   │   │   └── chat.ts
+│   │   │   ├── HomePage.tsx        # Główna strona z czatem
+│   │   │   ├── AboutPage.tsx       # /about
+│   │   │   └── HowItWorksPage.tsx  # /how-it-works
 │   │   ├── services/
-│   │   │   └── chatService.ts (komunikacja z backend proxy)
+│   │   │   └── chatService.ts      # HTTP client (fetch POST /api/chat)
+│   │   ├── store/
+│   │   │   └── chatStore.ts        # Zustand store + localStorage persist
+│   │   ├── types/
+│   │   │   └── chat.ts             # Typy TypeScript (Message, ChatRequest, etc.)
+│   │   ├── lib/
+│   │   │   └── utils.ts            # Helper: cn() do łączenia klas Tailwind
 │   │   ├── App.tsx
-│   │   └── main.tsx
+│   │   └── index.tsx
 │   ├── index.html
 │   ├── package.json
 │   ├── vite.config.ts
-│   └── tailwind.config.ts
-│
-├── backend/                  # Micro-service proxy (~200 linii)
+│   └── tailwind.config.js
+├── backend/                         # Micro-service proxy do OpenAI
 │   ├── src/
 │   │   ├── routes/
-│   │   │   └── chat.ts (proxy endpoint)
-│   │   └── index.ts (Express server)
-│   ├── .env.example
+│   │   │   └── chat.ts             # Endpoint POST /api/chat
+│   │   └── index.ts                # Express server + CORS + middleware
 │   ├── package.json
 │   └── tsconfig.json
-│
-├── .gitignore
+├── example.ts                       # Oryginalna implementacja CLI (geneza projektu)
 └── README.md
 ```
 
 ---
 
-## 📅 Plan Pracy - Phase 1 (MVP) - Szczegółowy
+## 🌐 API Endpoint
 
-**Cel MVP**: Działająca aplikacja online, czat z AI Photography Assistant, bez rejestracji użytkowników
-
-**Inspiracja**: Plik `example.ts` (terminal chatbot) → Web aplikacja z UI
-
-**Timeframe**: 2-3 tygodnie (4-5 dni pracy efektywnej)
-
----
-
-### Sprint 1: Setup Frontend (1-2 dni) 👉 [SPRINT-1.md](./SPRINT-1.md)
-
-**Efekt końcowy**: Działająca aplikacja React z mockowanym czatem
-
-- [x] Task 1.1: Inicjalizacja React + Vite (0.5h)
-- [x] Task 1.2: Instalacja TailwindCSS (0.5h)
-- [x] Task 1.3: Instalacja Shadcn/ui (0.5h)
-- [x] Task 1.4: Struktura folderów (components/layout, components/chat, pages) (0.5h)
-- [x] Task 1.5: Instalacja React Router (0.25h)
-- [x] Task 1.6: Typy TypeScript (`chat.ts`) (0.5h)
-- [x] Task 1.7: Zustand Store (0.5h)
-- [x] Task 1.8: Layout Components (Header, Layout) (0.5h)
-- [x] Task 1.9: Chat Components - Message & MessageList (0.75h)
-- [x] Task 1.10: Chat Components - ChatInput (0.5h)
-- [x] Task 1.11: Chat Components - ChatWindow (połączenie wszystkiego) (0.5h)
-- [x] Task 1.12: Pages (About, How It Works, Contact) (0.75h)
-- [x] Task 1.13: Routing & App.tsx - finalna integracja (0.5h)
-- [x] Task 1.14: Chat Services - template (0.5h)
-- [x] Task 1.15: Environment Variables (0.25h)
-- [x] Task 1.16: Testing & Polish (0.5h)
-- [x] Task 1.17: Deployment Setup - Vercel (0.5h)
-
-**Output**: Mockowany czat działa lokalnie, gotowy na integrację z backendem
-
----
-
-### Sprint 2: Backend Proxy (1 dzień) 👉 [SPRINT-2.md](./SPRINT-2.md)
-
-**Efekt końcowy**: Backend proxy do OpenAI API, działający lokalnie
-
-- [x] Task 2.1: Inicjalizacja Express + TypeScript (0.5h)
-- [x] Task 2.2: Struktura projektu backend (0.25h)
-- [x] Task 2.3: Environment Variables + .env.example (0.25h)
-- [x] Task 2.4: Endpoint `/api/chat` - proxy do OpenAI (1h)
-  - Integracja z OpenAI SDK
-  - System prompt fotograficzny (z README)
-  - Obsługa `previous_response_id` dla historii (jak w `example.ts`)
-- [x] Task 2.5: CORS configuration (0.25h)
-- [x] Task 2.6: Error handling (0.5h)
-- [x] Task 2.7: Testing lokalnie (Postman/curl) (0.5h)
-- [x] Task 2.8: Deployment na Render (0.5h)
-
-**Output**: Backend proxy online, testowany z Postman
-
----
-
-### Sprint 3: Integracja & Deploy (1 dzień) 👉 [SPRINT-3.md](./SPRINT-3.md)
-
-**Efekt końcowy**: Działająca aplikacja na produkcji (Vercel + Render)
-
-- [ ] Task 3.1: Podłączenie Frontend → Backend (`chatService.ts`) (0.5h)
-- [ ] Task 3.2: Testowanie flow'u lokalnie (0.5h)
-- [ ] Task 3.3: Weryfikacja persystencji localStorage (0.25h)
-- [ ] Task 3.4: UX improvements (loading states, error messages, clear chat) (0.75h)
-- [ ] Task 3.5: Deploy Backend na Render (0.5h)
-- [ ] Task 3.6: Deploy Frontend na Vercel (0.5h)
-- [ ] Task 3.7: Konfiguracja environment variables produkcji (0.25h)
-- [ ] Task 3.8: End-to-end testing produkcji (0.5h)
-- [ ] Task 3.9: Final polish (favicon, meta tags, README update) (0.5h)
-
-**Output**: 🚀 **MVP ONLINE** - Promptly Photo AI dostępna publicznie
-
----
-
-### Post-MVP: Dokumentacja & Portfolio (0.5 dnia)
-
-- [ ] Screenshot aplikacji
-- [ ] Demo GIF/wideo
-- [ ] Update README z linkami do live demo
-- [ ] Dodanie do portfolio (LinkedIn, GitHub profile)
-
----
-
-## ⚡ Szybki Start - Lokalna Praca
-
-```bash
-# 1. Backend proxy
-cd backend
-npm install
-cp .env.example .env      # Wpisz OPENAI_API_KEY
-npm run dev               # Nasłuchuje na :3001
-
-# 2. Frontend (nowe okno terminala)
-cd frontend
-npm install
-npm run dev               # Nasłuchuje na :5173
-```
-
-Otwórz **http://localhost:5173** w przeglądarce
-
----
-
-## 💡 System Prompt - Photography AI Assistant
+### Chat
 
 ```
-Jesteś ekspertem w fotografii z doświadczeniem 20+ lat.
-Odpowiadasz na pytania dotyczące:
-- Technik fotograficznych (ekspozycja, przesłona, ISO, ogniskowa)
-- Kompozycji i estetyki
-- Doboru sprzętu (aparaty, obiektywy, oświetlenie)
-- Obróbki zdjęć (lightroom, photoshop, rawtherapee)
-- Fotografii specjalistycznej (portret, krajobraz, makro, sportowa, eventowa)
-- Tipów dla początkujących fotografów
+POST /api/chat
+```
 
-Odpowiadaj zwięźle (max 2-3 paragrafy), praktycznie i dostępnie.
-Jeśli pytanie jest poza fotografią, grzecznie przekieruj.
-Kończąc każdą odpowiedź, nawiąż do jej treści i zaproś odbiorcę na odpowiednie plenery lub warsztaty fotograficzne: jeśli pytanie dotyczyło krajobrazów - zaproś na plener krajobrazowy, jeśli portretu - na warsztat portretowy, itd. Zaproszenie powinno brzmieć naturalnie i być powiązane z omawianym tematem. Na końcu dodaj link do [fotowarsztaty.com](https://fotowarsztaty.com).
+**Request Body:**
+
+```json
+{
+  "message": "Jak robić zdjęcia nocne bez tripodu?",
+  "previousResponseId": "resp_abc123..."
+}
+```
+
+`previousResponseId` jest opcjonalne — wymagane od drugiej wiadomości w rozmowie.
+
+**Response:**
+
+```json
+{
+  "id": "resp_xyz789...",
+  "message": "Do fotografii nocnej bez tripodu rekomenduje...",
+  "timestamp": "2026-02-23T12:00:00.000Z"
+}
+```
+
+**Health check:**
+
+```
+GET /health
 ```
 
 ---
 
-## 📊 Metryki Sukcesu - MVP
+## 📝 Zmienne środowiskowe
 
-- ✅ Działająca aplikacja lokalnie i na produkcji
-- ✅ Minimum 3 rozmowy testowe z AI
-- ✅ Integracja Frontend ↔ Backend bez błędów
-- ✅ Kod na GitHub z dokumentacją
+### Backend (`backend/.env`)
 
----
-
-## 🔧 Troubleshooting & FAQ
-
-### Backend replies `401 Unauthorized`
-
-Sprawdź czy `OPENAI_API_KEY` jest poprawny w `.env`
-
-### Vite showing `localhost` ale brak dostępu
-
-Upewnij się że terminal nie pokazuje błędów TypeScript - fix ich i poczekaj hot reload
-
-### Mogę zmienić model OpenAI?
-
-Tak! W `backend/src/routes/chat.ts` zmień pole `model`. Dostępne: `gpt-4o`, `gpt-4o-mini`, `o1-preview`
-
----
-
-## 🚀 Kluczowe Features - MVP
-
-✅ **Podstawowa Funkcjonalność**
-
-- Wysyłanie pytań do Photography AI
-- Odbieranie porad fotograficznych
-- Historia aktywnego czatu (localStorage - przetrwa refresh)
-- UI podobne do ChatGPT (dark mode, responsywne)
-- System prompt zapewnia spójne, ekspertowe odpowiedzi
-
-❌ **Poza Scope - Phase 1**
-
-- Konta użytkowników
-- Persystencja w bazie danych
-- Historia wielu czatów (sidebar, przełączanie)
-- Tworzenie/zarządzanie wieloma rozmowami
-
----
-
-## Environment Variables
-
-### Backend (.env)
-
-```
-OPENAI_API_KEY=your_key_here
-OPENAI_MODEL=gpt-4
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL=gpt-4o-mini
 PORT=3001
-
-SYSTEM_PROMPT=Jesteś ekspertem w fotografii z doświadczeniem 20+ lat. Odpowiadasz na pytania dotyczące: technik fotograficznych (ekspozycja, przesłana, ISO, ogniskowa), kompozycji i estetyki, doboru sprzętu (aparaty, obiektywy, oświetlenie), obróbki zdjęć (lightroom, photoshop, rawtherapee), fotografii specjalistycznej (portret, krajobraz, makro, sportowa, eventowa), tipów dla początkujących fotografów. Odpowiadaj zwięźle (max 2-3 paragrafy), praktycznie i dostępnie. Jeśli pytanie jest poza fotografią, grzecznie przekieruj. Kończąc każdą odpowiedź, nawiąż do jej treści i zaproś odbiorcę na odpowiednie plenery lub warsztaty fotograficzne: jeśli pytanie dotyczyło krajobrazów - zaproś na plener krajobrazowy, jeśli portretu - na warsztat portretowy, itd. Zaproszenie powinno brzmieć naturalnie i być powiązane z omawianym tematem. Na końcu dodaj link do fotowarsztaty.com (https://fotowarsztaty.com).
+FRONTEND_URL=http://localhost:5173
+SYSTEM_PROMPT=Jesteś ekspertem w fotografii...
 ```
 
-### Frontend (.env.local)
+### Frontend (`frontend/.env.local`)
 
-```
+```env
 VITE_API_URL=http://localhost:3001
 ```
 
 ---
 
-## 📝 API Specification - MVP
+## 🚀 Jak uruchomić projekt lokalnie
 
-### Chat Endpoint
+### Wymagania
 
-```
-POST /api/chat
+- Node.js (wersja LTS)
+- npm
+- Klucz OpenAI API (→ [platform.openai.com](https://platform.openai.com))
 
-Request Body:
-{
-  "message": "Jak robić zdjęcia nocne bez tripodu?",
-  "previousResponseId": "chatcmpl-1234..." (optional)
-}
+### Instalacja
 
-Response:
-{
-  "id": "chatcmpl-5678...",
-  "message": "Do fotografii nocnej bez tripodu rekomenduje...",
-  "timestamp": "2026-01-31T10:00:00Z"
-}
+1. **Sklonuj repozytorium:**
 
-Error Response (e.g., 500):
-{
-  "error": "Failed to connect to OpenAI API"
-}
+```bash
+git clone https://github.com/brzozanet/promptly-photo-ai.git
+cd promptly-photo-ai
 ```
 
+2. **Zainstaluj zależności (oba workspace'y):**
+
+```bash
+cd backend && npm install
+cd ../frontend && npm install
+```
+
+3. **Skonfiguruj zmienne środowiskowe backendu:**
+
+```bash
+cd backend
+cp .env.example .env
+# Uzupełnij OPENAI_API_KEY w pliku .env
+```
+
+4. **Skonfiguruj zmienne środowiskowe frontendu:**
+
+```bash
+cd frontend
+# Utwórz plik .env.local z zawartością:
+# VITE_API_URL=http://localhost:3001
+```
+
+5. **Uruchom backend** (terminal 1):
+
+```bash
+cd backend
+npm run dev
+# Nasłuchuje na http://localhost:3001
+```
+
+6. **Uruchom frontend** (terminal 2):
+
+```bash
+cd frontend
+npm run dev
+# Nasłuchuje na http://localhost:5173
+```
+
+Otwórz **[http://localhost:5173](http://localhost:5173)** w przeglądarce.
+
 ---
 
-## 💡 System Prompt - Jak To Działa?
+## ✨ Funkcjonalności MVP
 
-System prompt to "instrukcja" dla modelu AI. Ustawiasz ją raz, a model "zachowuje się" jak zadany ekspert - bez trenowania, bez ML.
-
-W naszym projekcie system prompt definiuje:
-
-- **Kim jest asystent**: Ekspert w fotografii z 20+ latami doświadczenia
-- **Co potrafi**: Technika, kompozycja, sprzęt, obróbka, fotografia specjalistyczna
-- **Jak odpowiada**: Zwięźle, praktycznie, z kontekstem
-- **Co robi na koniec**: Nawiązuje do tematu i zaprasza na warsztaty - [fotowarsztaty.com](https://fotowarsztaty.com)
-
-**Efekt**: Każda odpowiedź brzmi jak od rzeczywistego fotografa, a nie chatbota 📸
-
----
-
-## 🎨 Design Inspiration
-
-- ChatGPT UI (prosty, funkcjonalny layout)
-- Tematy fotograficzne (dark mode, ciepłe akcenty)
-- Responsive design (mobile-first approach)
+- 💬 Czat z AI Photography Assistant w czasie rzeczywistym
+- 🧠 Zachowanie historii rozmowy (`previous_response_id`) — model pamięta kontekst
+- 💾 Persystencja czatu w `localStorage` (historia przeżyje odświeżenie strony)
+- 📝 Renderowanie odpowiedzi AI jako Markdown (nagłówki, listy, bold, linki)
+- ⏳ Loading state podczas oczekiwania na odpowiedź AI
+- 🗑️ Czyszczenie historii czatu
+- 📱 Responsywny design (mobile-first)
+- 🌍 Routing: strona główna, /about, /how-it-works
+- 🔐 Klucz API wyłącznie po stronie serwera — bezpieczna architektura proxy
 
 ---
 
-## 📚 Techniczne Notatki
+## 📈 Fazy rozwoju
 
-1. **State Management**: Historia aktywnego czatu przechowywana w Zustand + localStorage (przetrwa refresh). Phase 2 dodaje bazę danych dla historii wielu czatów.
-2. **HTTP Client**: MVP używa Fetch API. **Axios planowany do Sprint 2+** (dodatkowy learning).
-3. **System Prompt**: Konfigurowany w backend `.env` - łatwo zmienić tematykę asystenta (np. na "Fitness Coach" czy "Web Dev Expert")
-4. **Error Handling**: Graceful error handling z user-friendly komunikatami.
-5. **CORS**: Backend proxy musi mieć poprawnie skonfigurowany CORS dla frontendu.
-6. **Bezpieczeństwo**: API key przechowywany po stronie serwera, nigdy nie trafia do frontendu.
-7. **Express → Next.js Migration Strategy**:
-   - **Phase 1-2**: Express.js + Vite (nauka fundamentów backend, routing, middleware, CORS)
-   - **Phase 3**: Migracja do Next.js (upload zdjęć wymaga Image Optimization, łatwiejsze API Routes)
-   - **Uzasadnienie**: Express = uniwersalna umiejętność (CV value), Next.js = optymalizacja dla produkcji
-   - **Timeline**: Q3 2026 (wraz z implementacją GPT-4 Vision)
-   - **Korzyści migracji**: 1 projekt zamiast 2, automatyczna optymalizacja obrazów, lepsze SEO, scalony deployment
+| Faza | Cel | Status | Timeframe |
+|------|-----|--------|-----------|
+| **Phase 1 (MVP)** | Czat z AI + deploy na produkcję | ✅ Ukończona | Q1 2026 |
+| **Phase 2** | Konta użytkowników, historia chatów, wiele rozmów | 📅 Planowana | Q2 2026 |
+| **Phase 3** | Upload zdjęć + ocena przez AI (GPT-4 Vision) | 📅 Planowana | Q3 2026 |
+| **Phase 4** | Edycja zdjęć przez AI (komendy tekstowe → DALL-E) | 📅 Planowana | Q4 2026+ |
+| **Phase 5** | Społeczność & portfolio fotograficzne | 📅 Planowana | 2027+ |
 
 ---
 
-## 🔄 Next Steps - Phase 2+ (Future Roadmap)
+## 🔄 Co będzie rozwijane następnie
 
-### Phase 2: Konta Użytkowników & Historia Chatów (Q2 2026)
-
-**Stack dodatkowy**: PostgreSQL (Supabase/Neon), JWT auth
-
-**Features**:
+### Phase 2: Konta użytkowników & Historia chatów (Q2 2026)
 
 - Rejestracja i logowanie użytkowników
-- Zapisywanie rozmów w bazie danych
-- Możliwość tworzenia wielu chatów
+- Zapisywanie rozmów w bazie danych (PostgreSQL + Prisma ORM)
+- Możliwość tworzenia wielu chatów i przełączania się między nimi
 - Historia rozmów dostępna po zalogowaniu
-- Dashboard użytkownika
-
-**Sprinty**:
-
-- Sprint 4: Setup bazy danych (PostgreSQL + Prisma ORM)
-- Sprint 5: Autentykacja (JWT, bcrypt, login/register endpoints)
-- Sprint 6: Zapisywanie rozmów do DB
-- Sprint 7: UI dla wielu chatów (sidebar, tworzenie nowych rozmów)
-
----
+- Autentykacja: JWT, bcrypt
 
 ### Phase 3: Upload & Ocena Zdjęć (Q3 2026)
 
-**Stack dodatkowy**: GPT-4 Vision API, S3/Cloudinary dla storage
-
-**🔄 MIGRACJA DO NEXT.JS** - Najbardziej sensowny moment:
-
-**Dlaczego teraz?**
-
-- ✅ Nauczyłeś się już Express (fundamenty backend)
-- ✅ Upload zdjęć wymaga lepszej optymalizacji obrazów
-- ✅ Scalenie frontend + backend = prostszy deployment
-- ✅ Przygotowanie pod skalowanie (Phase 4-5)
-
-**Co zyskujesz:**
-
-- **Image Optimization** - Next.js automatycznie kompresuje/konwertuje obrazy (WebP, AVIF)
-- **API Routes** - 1 projekt zamiast 2 (frontend + backend razem)
-- **SSR/SSG** - lepsze SEO dla galerii publicznych (Phase 5)
-- **Performance** - szybsze ładowanie dużych plików
-
-**Effort**: 2-3 dni (przepisanie Express endpoints → Next.js API Routes)
-
-**Decision Matrix**:
-| Faza | Express | Next.js | Status |
-|------|---------|---------|--------|
-| Phase 1-2 | ✅ Idealny (nauka) | ❌ Overkill | **Express** |
-| Phase 3+ | ⚠️ Działa, ale... | ✅ **Lepszy** | **→ Next.js** |
-
-**Features**:
-
-- Upload zdjęć przez użytkownika
-- AI analizuje zdjęcie (kompozycja, ekspozycja, balans bieli)
-- AI podaje ocenę i sugestie poprawy
-- Historia zdjęć z ocenami w profilu użytkownika
-
-**API wykorzystywane**:
-
-- OpenAI Vision API (GPT-4V) - analiza obrazów
-- System prompt: "Jesteś ekspertem fotografii. Oceń to zdjęcie pod kątem kompozycji, ekspozycji, ostrości..."
-
-**Sprinty**:
-
-- Sprint 8: Upload zdjęć (frontend + backend storage)
-- Sprint 9: Integracja GPT-4 Vision
-- Sprint 10: UI dla galerii zdjęć z ocenami
-
----
+- Użytkownik uploaduje zdjęcie → AI analizuje (kompozycja, ekspozycja, błędy)
+- Integracja GPT-4 Vision API + storage zdjęć (S3/Cloudinary)
+- **Migracja do Next.js** — najbardziej sensowny moment: Image Optimization, scalony deployment, API Routes
 
 ### Phase 4: Edycja Zdjęć przez AI (Q4 2026+)
 
-**Stack dodatkowy**: DALL-E API, Image Editing Models
-
-**Features**:
-
-- Użytkownik podaje komendy tekstowe: "usuń drzewo", "dodaj chmury", "wygładź skórę"
-- AI wykonuje edycję zdjęcia
-- Użytkownik widzi before/after
-- Możliwość zapisania edytowanego zdjęcia
-
-**API wykorzystywane**:
-
-- OpenAI DALL-E 3 (image editing/inpainting)
-- Stable Diffusion (alternatywa open-source)
-
-**Sprinty**:
-
-- Sprint 11: Integracja DALL-E API
-- Sprint 12: UI do edycji (before/after, komendy tekstowe)
-- Sprint 13: Eksport edytowanych zdjęć
-
----
+- Użytkownik podaje komendy tekstowe: „usuń drzewo", „dodaj chmury"
+- AI wykonuje edycję zdjęcia (DALL-E 3 / inpainting)
+- Widok before/after + eksport edytowanego zdjęcia
 
 ### Phase 5: Społeczność & Portfolio (2027+)
-
-**Features**:
 
 - Galeria publiczna zdjęć użytkowników
 - Komentarze i oceny społeczności
 - Portfolio fotograficzne dla każdego użytkownika
-- Eksport rozmów do PDF
-- Integracja z social media
 
 ---
 
-## 📖 Przydatne Zasoby
+## 📖 Przydatne zasoby
 
 - [OpenAI API Docs](https://platform.openai.com/docs)
-- [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses) (previous_response_id)
-- [React Best Practices](https://react.dev)
+- [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses)
+- [React Documentation](https://react.dev)
 - [Express.js Guide](https://expressjs.com)
 - [TailwindCSS](https://tailwindcss.com)
 - [Shadcn/ui Components](https://ui.shadcn.com)
@@ -495,36 +337,6 @@ W naszym projekcie system prompt definiuje:
 
 ---
 
-## 🎯 Quick Reference - Dla Początkujących
-
-### Rozpoczęcie pracy (MVP - Phase 1)
-
-1. **Sprint 1** (1-2 dni): Zbuduj UI w React - mockowany czat działa
-2. **Sprint 2** (1 dzień): Stwórz backend proxy do OpenAI
-3. **Sprint 3** (1 dzień): Połącz Frontend + Backend, deploy online
-
-**Po 4-5 dniach efektywnej pracy masz działającą aplikację online! 🚀**
-
-### Jak używać tego README?
-
-- ✅ Czytaj sekcje **📅 Plan Pracy - Phase 1** krok po kroku
-- ✅ Każdy Sprint ma osobny plik (SPRINT-1.md, SPRINT-2.md, SPRINT-3.md)
-- ✅ Każdy Task ma:
-  - Cel (co osiągasz)
-  - Kroki (co robisz)
-  - Kod (co wpisujesz)
-  - Checklist (jak sprawdzasz)
-- ✅ Nie przeskakuj tasków - rób po kolei
-- ✅ Po każdym Tasku commit do Git: `git commit -m "feat: task-1.x-nazwa"`
-
-### Problemy?
-
-- Troubleshooting → sekcja **🔧 Troubleshooting & FAQ**
-- Pytania techniczne → [OpenAI Community](https://community.openai.com)
-- Błędy React/Vite → sprawdź konsolę przeglądarki (F12)
-
----
-
-**Status**: 📝 Plan Phase 1 MVP - Gotowy do implementacji  
-**Następny krok**: [Sprint 1: Setup Frontend](./SPRINT-1.md)  
-**Ostatnia Aktualizacja**: 01.02.2026
+**Status**: ✅ Phase 1 MVP — aplikacja działa na produkcji  
+**Live demo**: [https://promptly-photo-ai.vercel.app](https://promptly-photo-ai.vercel.app)  
+**Ostatnia aktualizacja**: 23.02.2026
