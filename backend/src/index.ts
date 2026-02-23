@@ -12,16 +12,17 @@ const PORT = process.env.PORT || "3001";
 // NOTE: Middleware - funkcje przetwarzające każdy request
 
 // CORS - pozwala frontendowi łączyć się z backendem
-// const allowedOrigins = process.env.FRONTEND_URL
-//   ? process.env.FRONTEND_URL.split(",")
-//   : ["http://localhost:3000"];
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(",")
+  : ["http://localhost:3000"];
 
 app.use(
   cors({
-    origin: ["https://promptly-photo-ai.vercel.app/"],
+    origin: allowedOrigins,
     credentials: true,
   }),
 );
+
 // JSON Parser - automatycznie parsuje body requestów do JSON
 app.use(express.json());
 
