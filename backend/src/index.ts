@@ -18,10 +18,7 @@ const PORT = process.env.PORT || "3001";
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "https://promptly-backend-t9hl.onrender.com",
-    ],
+    origin: ["https://promptly-backend-t9hl.onrender.com"],
     credentials: true,
   }),
 );
