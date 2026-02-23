@@ -11,7 +11,7 @@ const PORT = process.env.PORT || "3001";
 
 // NOTE: Middleware - funkcje przetwarzające każdy request
 
-// CORS - pozwala frontendowi łączyć się z backendem
+// CORS - pozwala frontendowi łączyć się z backendemeem
 // const allowedOrigins = process.env.FRONTEND_URL
 //   ? process.env.FRONTEND_URL.split(",")
 //   : ["http://localhost:3000"];
