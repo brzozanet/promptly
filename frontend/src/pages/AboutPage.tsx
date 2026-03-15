@@ -1,8 +1,8 @@
 export function AboutPage() {
   return (
     <>
-      <div className="mx-auto w-full max-w-5xl py-5 text-white mb-10">
-        <h2 className="text-5xl bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mt-10 mb-10">
+      <div className="info-page mx-auto mb-10 w-full max-w-5xl px-4 py-5 md:px-0">
+        <h2 className="material-title mb-10 mt-10 text-5xl font-semibold">
           O projekcie Promptly Photo AI
         </h2>
         <p className="mb-4">
@@ -28,6 +28,7 @@ export function AboutPage() {
         <p className="mb-4">
           🔗{" "}
           <a
+            className="font-semibold text-primary underline"
             href="https://github.com/brzozanet/promptly-photo-ai"
             target="_blank"
           >
@@ -35,7 +36,7 @@ export function AboutPage() {
           </a>
         </p>
 
-        <h3 className="text-2xl mt-6 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mb-4">
+        <h3 className="material-title mb-4 mt-6 text-2xl font-semibold">
           Połączenie technologii i fotografii
         </h3>
 
@@ -70,7 +71,7 @@ export function AboutPage() {
           uczestnikami.
         </p>
 
-        <h3 className="text-2xl mt-6 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mb-4">
+        <h3 className="material-title mb-4 mt-6 text-2xl font-semibold">
           Projekt portfolio z realnym zastosowaniem
         </h3>
 
@@ -91,7 +92,7 @@ export function AboutPage() {
           koncepcji, przez UI, po deployment.
         </p>
 
-        <h3 className="text-2xl mt-6 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mb-4">
+        <h3 className="material-title mb-4 mt-6 text-2xl font-semibold">
           Stack technologiczny
         </h3>
 
@@ -119,7 +120,7 @@ export function AboutPage() {
           <li>Render — backend</li>
         </ul>
 
-        <h3 className="text-2xl mt-6 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mb-4">
+        <h3 className="material-title mb-4 mt-6 text-2xl font-semibold">
           Dlaczego ten projekt?
         </h3>
 

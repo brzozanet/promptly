@@ -17,15 +17,15 @@ export function Message({ role, content, timestamp }: Message) {
           src={avatar}
           alt="assistant"
           title="assistant"
-          className="h-8 w-8 rounded-full invert"
+          className="h-8 w-8 rounded-full"
         />
       )}
 
       <div
-        className={`max-w-[75%] rounded-2xl px-4 py-2 text-sm shadow-sm ${
+        className={`max-w-[75%] rounded-3xl border border-border/60 px-4 py-2 text-sm shadow-sm ${
           isUser
-            ? "bg-linear-to-r from-gray-600 via-gray-650 to-gray-600 text-primary-foreground"
-            : "bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-foreground"
+            ? "bg-secondary/90 text-secondary-foreground"
+            : "bg-card/95 text-card-foreground"
         }`}
       >
         <div className="text-left text-[16px] mb-3 mt-1">
@@ -46,7 +46,7 @@ export function Message({ role, content, timestamp }: Message) {
               ),
               a: ({ children }) => (
                 <a
-                  className="text-cyan-300 font-bold underline cursor-pointer"
+                  className="cursor-pointer font-semibold text-primary underline"
                   href="https://fotowarsztaty.com"
                   target="_blank"
                   rel="noreferrer"
@@ -56,7 +56,7 @@ export function Message({ role, content, timestamp }: Message) {
               ),
 
               hr: ({ children }) => (
-                <hr className="border-sky-500">{children}</hr>
+                <hr className="border-border">{children}</hr>
               ),
             }}
           >
@@ -80,7 +80,7 @@ export function Message({ role, content, timestamp }: Message) {
           src={avatar}
           alt="user"
           title="user"
-          className="h-8 w-8 rounded-full invert"
+          className="h-8 w-8 rounded-full"
         />
       )}
     </div>

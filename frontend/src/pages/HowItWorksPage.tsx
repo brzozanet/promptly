@@ -1,8 +1,8 @@
 export function HowItWorksPage() {
   return (
     <>
-      <div className="mx-auto w-full max-w-5xl py-5 text-white">
-        <h2 className="text-5xl bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mt-10 mb-10">
+      <div className="info-page mx-auto w-full max-w-5xl px-4 py-5 md:px-0">
+        <h2 className="material-title mb-10 mt-10 text-5xl font-semibold">
           Jak działa Promptly Photo AI?
         </h2>
         <p className="mb-4">
@@ -15,7 +15,7 @@ export function HowItWorksPage() {
           doradza jak doświadczony fotograf-praktyk.
         </p>
 
-        <h3 className="text-2xl mt-6 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mb-4">
+        <h3 className="material-title mb-4 mt-6 text-2xl font-semibold">
           Model AI wyszkolony w roli fotografa-instruktora
         </h3>
 
@@ -37,8 +37,8 @@ export function HowItWorksPage() {
           precyzyjnych instrukcji, które nadają modelowi stałą rolę:
         </p>
 
-        <blockquote className="relative pl-6 italic mb-4">
-          <span className="absolute -left-4 -top-2 text-6xl text-indigo-200 leading-none">
+        <blockquote className="material-surface relative mb-4 rounded-2xl pl-6 italic">
+          <span className="absolute -left-4 -top-2 text-6xl leading-none text-primary/30">
             “
           </span>
           Odpowiadaj jak instruktor fotografii, mentor i praktyk.
@@ -58,7 +58,7 @@ export function HowItWorksPage() {
           </li>
         </ul>
 
-        <h3 className="text-2xl mt-6 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mb-4">
+        <h3 className="material-title mb-4 mt-6 text-2xl font-semibold">
           Analiza pytania i kontekstu fotograficznego
         </h3>
 
@@ -84,8 +84,8 @@ export function HowItWorksPage() {
           <strong>Przykład:</strong>
         </p>
 
-        <blockquote className="relative pl-6 italic mb-4">
-          <span className="absolute -left-4 -top-2 text-6xl text-indigo-200 leading-none">
+        <blockquote className="material-surface relative mb-4 rounded-2xl pl-6 italic">
+          <span className="absolute -left-4 -top-2 text-6xl leading-none text-primary/30">
             “
           </span>
           Jak ustawić aparat do zdjęć nocnych w mieście?
@@ -100,7 +100,7 @@ export function HowItWorksPage() {
           <li>jakie błędy pojawiają się najczęściej.</li>
         </ul>
 
-        <h3 className="text-2xl mt-6 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mb-4">
+        <h3 className="material-title mb-4 mt-6 text-2xl font-semibold">
           Odpowiedzi jak na warsztatach fotograficznych
         </h3>
 
@@ -121,7 +121,7 @@ export function HowItWorksPage() {
           <strong>„dlaczego warto zrobić to w ten sposób”</strong>.
         </p>
 
-        <h3 className="text-2xl mt-6 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mb-4">
+        <h3 className="material-title mb-4 mt-6 text-2xl font-semibold">
           Specjalizacja w różnych dziedzinach fotografii
         </h3>
 
@@ -147,7 +147,7 @@ export function HowItWorksPage() {
           .
         </p>
 
-        <h3 className="text-2xl mt-6 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mb-4">
+        <h3 className="material-title mb-4 mt-6 text-2xl font-semibold">
           Bezpieczne i przewidywalne odpowiedzi
         </h3>
 
@@ -167,7 +167,7 @@ export function HowItWorksPage() {
           nie generatorem przypadkowych odpowiedzi.
         </p>
 
-        <h3 className="text-2xl mt-6 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mb-4">
+        <h3 className="material-title mb-4 mt-6 text-2xl font-semibold">
           Ciągłe doskonalenie
         </h3>
 
@@ -181,7 +181,7 @@ export function HowItWorksPage() {
           </li>
         </ul>
 
-        <h3 className="text-2xl mt-6 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold mb-4">
+        <h3 className="material-title mb-4 mt-6 text-2xl font-semibold">
           Promptly Photo AI to:
         </h3>
 

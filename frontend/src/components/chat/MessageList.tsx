@@ -33,7 +33,7 @@ export function MessageList() {
 
   return (
     <>
-      <h2 className="text-white text-2xl text-left mb-6">
+      <h2 className="mb-6 text-left text-2xl font-semibold text-foreground">
         {truncateTitleByWords(messages[0]?.content ?? "", 5)}
       </h2>
       <ul className="space-y-4 px-4 mb-12">

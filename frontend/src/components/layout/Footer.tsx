@@ -1,14 +1,14 @@
 export function Footer() {
   return (
     <>
-      <footer className="text-center bg-gray-600/60 py-4">
-        <p className="text-neutral-500">
+      <footer className="relative z-10 border-t border-border/70 bg-card/70 py-4 text-center backdrop-blur-xl">
+        <p className="text-muted-foreground">
           Asystent AI może popełniać błędy. Sprawdź ważne informacje.
         </p>
-        <p className="text-white">
+        <p className="text-foreground">
           Made with ❤️ by{" "}
           <a
-            className="text-cyan-300 font-bold cursor-pointer"
+            className="cursor-pointer font-bold text-primary hover:text-primary/80"
             href="https://brzoza.net"
             target="_blank"
             rel="noreferrer"

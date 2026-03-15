@@ -3,16 +3,16 @@ import { ChatInput } from "../chat/ChatInput";
 
 export function EmptyChat() {
   return (
-    <div className="mx-auto flex min-h-[calc(90vh-260px)] w-full max-w-5xl flex-col justify-center">
-      <h1 className="text-3xl ml-4 text-white text-left mb-6 font-light">
+    <div className="mx-auto flex min-h-[calc(90vh-260px)] w-full max-w-5xl flex-col justify-center px-3 md:px-0">
+      <h1 className="material-enter-up material-delay-1 mb-6 ml-4 text-left text-3xl font-light text-foreground">
         Porozmawiaj z{" "}
-        <span className="bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold">
+        <span className="bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold">
           Promptly
         </span>{" "}
         o fotografii
       </h1>
-      <h2 className="text-5xl ml-4 bg-linear-to-r from-indigo-500 from-5% via-sky-500 via-15% to-emerald-500 to-80% bg-clip-text text-transparent text-left mb-6 font-medium">
-        <span className="text-white">Jak </span>
+      <h2 className="material-enter-soft material-delay-2 mb-6 ml-4 bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-80% bg-clip-text text-left text-5xl font-medium text-transparent">
+        <span className="text-foreground">Jak </span>
 
         <Typewriter
           words={[
@@ -42,7 +42,7 @@ export function EmptyChat() {
           cursorBlinking={true}
         />
       </h2>
-      <div className="sticky">
+      <div className="material-enter-up material-delay-3 sticky">
         <ChatInput />
       </div>
     </div>

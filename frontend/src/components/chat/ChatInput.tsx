@@ -110,19 +110,22 @@ export function ChatInput() {
             visible={true}
             height="120"
             width="120"
-            color="#4fa94d"
-            outerCircleColor="#10B981"
-            middleCircleColor="#0EA5E9"
-            innerCircleColor="#6366F1"
+            color="#4A8AF4"
+            outerCircleColor="#4A8AF4"
+            middleCircleColor="#5FB0A8"
+            innerCircleColor="#8397C2"
             ariaLabel="three-circles-loading"
             wrapperStyle={{}}
             wrapperClass=""
           />
         </div>
       )}
-      <form className="p-4 flex gap-2" onSubmit={sendPrompt}>
+      <form
+        className="material-surface material-enter-up mx-4 mb-4 flex gap-2 rounded-3xl p-4 md:mx-0"
+        onSubmit={sendPrompt}
+      >
         <Textarea
-          className="min-h-30 resize-none backdrop-blur text-white text-lg! md:text-lg! placeholder:text-lg"
+          className="min-h-30 resize-none rounded-2xl border-border/70 bg-background/70 text-base text-foreground shadow-none placeholder:text-muted-foreground md:text-base"
           placeholder="Pytaj o fotografię... (Shift+Enter = nowa linia)"
           disabled={isLoading}
           value={input}
@@ -130,7 +133,7 @@ export function ChatInput() {
           onKeyDown={handleKeyDown}
         />
         <Button
-          className="w-24 bg-blue-500 shadow-lg shadow-black-500/50 hover:bg-emerald-500 disabled:opacity-50 px-4 py-2 rounded-md font-bold self-end cursor-pointer disabled:cursor-not-allowed"
+          className="h-11 w-24 self-end rounded-full bg-primary px-4 py-2 font-semibold text-primary-foreground shadow-sm shadow-primary/30 transition hover:bg-primary/90 hover:shadow-md hover:shadow-primary/30 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={!isInputValid}
           type="submit"
         >

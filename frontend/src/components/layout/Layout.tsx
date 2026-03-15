@@ -7,7 +7,7 @@ import bgImage from "../../assets/bg-drawing.jpg";
 export function Layout() {
   return (
     <div
-      className="flex h-screen flex-col"
+      className="relative isolate flex h-screen flex-col"
       style={{
         backgroundImage: `url(${bgImage})`,
         backgroundPosition: "bottom center",
@@ -16,8 +16,9 @@ export function Layout() {
         backgroundSize: "cover",
       }}
     >
+      <div className="absolute inset-0 pointer-events-none bg-linear-to-r from-background/78 via-background/90 to-background/78" />
       <Header />
-      <main className="flex-1 overflow-auto">
+      <main className="material-enter-soft relative z-10 flex-1 overflow-auto">
         <Outlet />
       </main>
       <Footer />

@@ -23,9 +23,9 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-80% px-6 py-4 w-full shadow-2xl">
+    <header className="material-enter-top sticky top-0 z-50 w-full bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-80% px-6 py-4 shadow-2xl">
       <div className="flex items-center justify-between max-w-5xl mx-auto">
-        <div className="flex flex-row gap-3 items-center text-xl font-bold">
+        <div className="flex flex-row gap-3 items-center text-xl font-bold text-black">
           <img
             src={iconPromptly}
             alt="Promptly"
@@ -37,14 +37,14 @@ export function Header() {
           </NavLink>
         </div>
         <nav>
-          <ul className="flex flex-row gap-6 items-center font-bold">
+          <ul className="flex flex-row gap-6 items-center font-semibold text-black">
             {messages.length !== 0 &&
             location.pathname !== "/how.html" &&
             location.pathname !== "/about.html" ? (
               <li>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button className="bg-blue-500 shadow-lg shadow-black-500/50 hover:bg-emerald-600 disabled:opacity-50 px-6 py-4 rounded-md font-bold self-end cursor-pointer disabled:cursor-not-allowed">
+                    <Button className="rounded-full border border-white/60 bg-white px-6 py-4 font-semibold text-slate-900 shadow-lg shadow-cyan-950/35 transition hover:border-sky-500 hover:bg-sky-500 hover:text-white hover:shadow-xl hover:shadow-cyan-950/35 disabled:opacity-50 cursor-pointer">
                       Nowa rozmowa
                     </Button>
                   </AlertDialogTrigger>
@@ -79,7 +79,7 @@ export function Header() {
             location.pathname === "/about.html" ? (
               <li>
                 <NavLink to="/">
-                  <button className="bg-blue-500 shadow-lg shadow-black-500/50 hover:bg-emerald-600 disabled:opacity-50 px-6 py-2 rounded-md font-bold self-end cursor-pointer disabled:cursor-not-allowed text-white text-sm">
+                  <button className="rounded-full border border-white/60 bg-white px-6 py-2 text-sm font-semibold text-black shadow-lg shadow-cyan-950/35 transition hover:border-sky-500 hover:bg-sky-500 hover:text-black hover:shadow-xl hover:shadow-cyan-950/35 disabled:opacity-50 cursor-pointer">
                     {messages.length !== 0 ? "Wróć do rozmowy" : "Nowa rozmowa"}
                   </button>
                 </NavLink>
@@ -88,10 +88,20 @@ export function Header() {
               ""
             )}
             <li>
-              <NavLink to="how.html">Jak to działa?</NavLink>
+              <NavLink
+                className="top-nav-link top-nav-link-gradient"
+                to="how.html"
+              >
+                Jak to działa?
+              </NavLink>
             </li>
             <li>
-              <NavLink to="about.html">O projekcie</NavLink>
+              <NavLink
+                className="top-nav-link top-nav-link-gradient"
+                to="about.html"
+              >
+                O projekcie
+              </NavLink>
             </li>
           </ul>
         </nav>
