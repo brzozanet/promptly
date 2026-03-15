@@ -1,6 +1,6 @@
 # 📸 Promptly Photo — AI Photography Assistant
 
-![Screenshot App](https://raw.githubusercontent.com/brzozanet/promptly-photo-ai/refs/heads/main/frontend/public/images/gh-cover-promptly-v1.png)
+![Screenshot App](https://raw.githubusercontent.com/brzozanet/promptly-photo-ai/refs/heads/main/frontend/public/images/gh-cover-promptly-v2.png)
 
 ### Inteligentny asystent fotograficzny oparty na OpenAI
 
