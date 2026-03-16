@@ -55,9 +55,7 @@ export function Message({ role, content, timestamp }: Message) {
                 </a>
               ),
 
-              hr: ({ children }) => (
-                <hr className="border-border">{children}</hr>
-              ),
+              hr: ({ children }) => <hr className="invisible">{children}</hr>,
             }}
           >
             {content}
@@ -68,7 +66,7 @@ export function Message({ role, content, timestamp }: Message) {
             src={iconClock8}
             alt="timestamp"
             title="timestamp"
-            className={`h-4 ${isUser && "invert"}`}
+            className="h-4"
           />
           <p className="text-[11px] whitespace-pre-wrap text-left">
             {timestamp}
