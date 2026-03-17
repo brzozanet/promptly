@@ -1,6 +1,6 @@
 # 📸 FOTAI — AI Photography Assistant
 
-![Screenshot App](https://raw.githubusercontent.com/brzozanet/fotai.app/refs/heads/main/frontend/public/images/gh-cover-promptly-v2.png)
+![Screenshot App](https://raw.githubusercontent.com/brzozanet/fotai.app/refs/heads/main/frontend/public/images/gh-cover-fotai-v1.png)
 
 ### Inteligentny asystent fotograficzny oparty na OpenAI
 
