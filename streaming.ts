@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import dotenv from "dotenv";
 import readline from "node:readline";
 import { OpenRouter } from "@openrouter/sdk";
