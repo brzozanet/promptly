@@ -9,11 +9,11 @@
 
 ## 📋 Przegląd Sprintu
 
-W tym sprincie budujesz **system autentykacji** — jeden z najbardziej fundamentalnych elementów każdej aplikacji webowej. Zanim to jednak zrobisz, musisz przygotować **bazę danych** (PostgreSQL + Prisma), bo hasła i dane użytkowników muszą gdzieś mieszkać.
+W tym sprincie budujesz **system autentykacji** — jeden z najbardziej fundamentalnych elementów każdej aplikacji webowej. Zanim to jednak zrobisz, musisz przygotować **bazę danych** (MySQL + Prisma), bo hasła i dane użytkowników muszą gdzieś mieszkać.
 
 **Na koniec Sprint 1 Phase 2 powinieneś mieć**:
 
-- ✅ Baza danych PostgreSQL działa lokalnie
+- ✅ Baza danych MySQL działa lokalnie
 - ✅ Prisma ORM skonfigurowane, model `User` gotowy
 - ✅ Endpoint `POST /api/auth/register` — rejestruje użytkownika (hashuje hasło bcrypt)
 - ✅ Endpoint `POST /api/auth/login` — loguje, zwraca token JWT
@@ -30,11 +30,13 @@ Bez autentykacji każdy użytkownik widzi dane wszystkich innych. System logowan
 
 ## 🧱 Nowe technologie w tym sprincie
 
-### PostgreSQL — co to jest?
+### MySQL — co to jest?
 
-**PostgreSQL** to relacyjna baza danych. Dane przechowuje w tabelach (jak arkusz Excel), a między tabelami mogą być relacje ("user ma wiele chatów").
+**MySQL** to relacyjna baza danych. Dane przechowuje w tabelach (jak arkusz Excel), a między tabelami mogą być relacje ("user ma wiele chatów").
 
-**Analogia**: Jeśli localStorage to "notatnik na biurku", to PostgreSQL to "szafa z segregatorami w archiwum firmy" — bardziej pojemna, trwała i dostępna z wielu miejsc.
+W Phase 2 używamy **MySQL** hostowanego na Twoim koncie cyber_Folks. Prisma obsługuje oba silniki (MySQL i PostgreSQL) identycznie — różnica jest tylko w jednej linii konfiguracji.
+
+**Analogia**: Jeśli localStorage to "notatnik na biurku", to MySQL to "szafa z segregatorami w archiwum firmy" — bardziej pojemna, trwała i dostępna z wielu miejsc.
 
 **Dlaczego nie localStorage?**
 
@@ -116,15 +118,15 @@ eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJjbG9iLi4uIn0.xK9mP...
 
 ---
 
-## 🎯 Task 1.1: Instalacja PostgreSQL lokalnie (0.25h)
+## 🎯 Task 1.1: Lokalna baza MySQL (0.25h)
 
 ### Cel
 
-Uruchomienie lokalnej bazy danych PostgreSQL, na której będziesz pracować podczas developmentu.
+Uruchomienie lokalnej bazy danych MySQL, na której będziesz pracować podczas developmentu. Na produkcji używasz bazy MySQL na cyber_Folks — lokalnie uruchamiasz identyczną wersję, żeby mieć pewność, że kod będzie działał tak samo.
 
 ### Opcja A: Docker (zalecane)
 
-Jeśli masz Dockera, to najprostszy sposób. Docker uruchamia PostgreSQL w izolowanym kontenerze — nie instalujesz nic globalnie.
+Jeśli masz Dockera, to najprostszy sposób.
 
 **Sprawdź czy masz Dockera**:
 
@@ -132,23 +134,23 @@ Jeśli masz Dockera, to najprostszy sposób. Docker uruchamia PostgreSQL w izolo
 docker --version
 ```
 
-**Uruchom PostgreSQL**:
+**Uruchom MySQL**:
 
 ```bash
-docker run --name fotai-postgres \
-  -e POSTGRES_PASSWORD=password \
-  -e POSTGRES_DB=fotai_dev \
-  -p 5432:5432 \
-  -d postgres:16
+docker run --name fotai-mysql \
+  -e MYSQL_ROOT_PASSWORD=password \
+  -e MYSQL_DATABASE=fotai_dev \
+  -p 3306:3306 \
+  -d mysql:8
 ```
 
 **Co te flagi znaczą?**
 
-- `--name fotai-postgres` — nazwa kontenera (do łatwego zatrzymywania/startowania)
-- `-e POSTGRES_PASSWORD=password` — hasło do bazy (tylko lokalnie, możesz używać prostego)
-- `-e POSTGRES_DB=fotai_dev` — automatycznie tworzy bazę o tej nazwie
-- `-p 5432:5432` — mapuje port kontenera na port maszyny (5432 to domyślny port PostgreSQL)
-- `-d` — uruchom w tle (detached)
+- `--name fotai-mysql` — nazwa kontenera
+- `-e MYSQL_ROOT_PASSWORD=password` — hasło root (tylko lokalnie)
+- `-e MYSQL_DATABASE=fotai_dev` — automatycznie tworzy bazę
+- `-p 3306:3306` — mapuje port MySQL na port maszyny
+- `-d` — uruchom w tle
 
 **Sprawdź czy działa**:
 
@@ -156,34 +158,29 @@ docker run --name fotai-postgres \
 docker ps
 ```
 
-Powinieneś zobaczyć `fotai-postgres` ze statusem `Up`.
+Powinieneś zobaczyć `fotai-mysql` ze statusem `Up`.
 
 **Następnym razem** (jeśli kontener jest zatrzymany):
 
 ```bash
-docker start fotai-postgres
+docker start fotai-mysql
 ```
 
 ---
 
 ### Opcja B: Instalacja natywna
 
-Pobierz installer ze strony [postgresql.org/download](https://www.postgresql.org/download/) i zainstaluj. Podczas instalacji:
-
-- Zapamiętaj hasło dla użytkownika `postgres`
-- Port zostaw domyślny: `5432`
+Pobierz installer ze strony [dev.mysql.com/downloads](https://dev.mysql.com/downloads/mysql/) i zainstaluj. Podczas instalacji zapamiętaj hasło dla użytkownika `root`.
 
 ---
 
 ### Connection String
 
-W obu przypadkach Twój **connection string** (adres URL do bazy) będzie:
-
 ```
-postgresql://postgres:password@localhost:5432/fotai_dev
+mysql://root:password@localhost:3306/fotai_dev
 ```
 
-Format: `postgresql://[user]:[password]@[host]:[port]/[database]`
+Format: `mysql://[user]:[password]@[host]:[port]/[database]`
 
 Zapisz go — będziesz go używać w pliku `.env`.
 
@@ -191,7 +188,7 @@ Zapisz go — będziesz go używać w pliku `.env`.
 
 ### Sprawdzenie
 
-- [x] PostgreSQL działa lokalnie (Docker: `docker ps` pokazuje kontener `Up`)
+- [x] MySQL działa lokalnie (Docker: `docker ps` pokazuje kontener `Up`)
 - [x] Możesz się połączyć (sprawdź w kolejnym kroku przez Prismę)
 
 ---
@@ -228,7 +225,7 @@ npm install prisma --save-dev
 ### Krok 2: Inicjalizacja Prismy
 
 ```bash
-npx prisma init --datasource-provider postgresql
+npx prisma init --datasource-provider mysql
 ```
 
 To polecenie tworzy:
@@ -248,7 +245,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -272,13 +269,15 @@ model Chat {
 model Message {
   id        String   @id @default(cuid())
   role      String
-  content   String
+  content   String   @db.Text
   openaiId  String?
   chatId    String
   chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 }
 ```
+
+> ⚠️ **Dlaczego `@db.Text` na `content`?** MySQL domyślnie tworzy pole `VARCHAR(191)` — to za mało na długie odpowiedzi AI. `@db.Text` mówi Prismie, żeby użyła typu `TEXT` (do ok. 65 000 znaków).
 
 **Wyjaśnienie modeli**:
 
@@ -308,7 +307,12 @@ Pole opcjonalne — może być `null`. `openaiId` jest opcjonalne, bo wiadomośc
 W `backend/.env` dodaj (lub zaktualizuj) `DATABASE_URL`:
 
 ```env
-DATABASE_URL="postgresql://postgres:password@localhost:5432/fotai_dev"
+# Lokalny development (Docker MySQL):
+DATABASE_URL="mysql://root:password@localhost:3306/fotai_dev"
+
+# Produkcja (cyber_Folks) — uzupełnij po założeniu bazy w DirectAdmin:
+# DATABASE_URL="mysql://db_user:db_password@s53.cyber-folks.pl:3306/db_name"
+
 OPENAI_API_KEY="sk-..."
 # ... pozostałe zmienne
 JWT_SECRET="super-tajny-klucz-do-podpisywania-tokenow-zmien-to-na-produkcji"
@@ -1303,7 +1307,7 @@ export function Header() {
 
 ### Backend
 
-- [ ] PostgreSQL uruchomiony lokalnie (Docker lub natywny)
+- [ ] MySQL uruchomiony lokalnie (Docker)
 - [ ] Prisma skonfigurowana, schema z modelami: `User`, `Chat`, `Message`
 - [ ] Migracja `init` wykonana — tabele istnieją w bazie
 - [ ] `backend/src/lib/prisma.ts` — singleton klienta Prismy
@@ -1342,5 +1346,5 @@ W Sprint 2 skupiasz się na **wieloczatowości i zapisywaniu rozmów w bazie dan
 - Endpointy REST dla chatów: `GET /api/chats`, `POST /api/chats`, `DELETE /api/chats/:id`
 - Endpoint dla wiadomości: `GET /api/chats/:id/messages`, `POST /api/chats/:id/messages`
 - Sidebar w UI z listą chatów i przyciskiem "Nowy czat"
-- Wiadomości zapisywane w PostgreSQL (zamiast localStorage)
+- Wiadomości zapisywane w MySQL (zamiast localStorage)
 - Przełączanie między chatami

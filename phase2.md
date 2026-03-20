@@ -3,19 +3,19 @@
 > 🎯 **Cel Phase 2**: Dodanie pełnego systemu autentykacji, persystentnej historii rozmów w bazie danych i możliwości prowadzenia wielu niezależnych chatów.
 
 **Timeframe**: ~3 sprinty (ok. 3-4 dni efektywnej pracy)
-**Poziom**: Junior (brak doświadczenia z Prisma, PostgreSQL, JWT, bcrypt — wszystkiego nauczysz się w toku pracy)
+**Poziom**: Junior (brak doświadczenia z Prisma, MySQL, JWT, bcrypt — wszystkiego nauczysz się w toku pracy)
 
 ---
 
 ## 🗺️ Co zmienia się względem Phase 1?
 
-| Obszar                | Phase 1                               | Phase 2                                      |
-| --------------------- | ------------------------------------- | -------------------------------------------- |
-| Historia czatu        | localStorage (tylko jeden czat)       | PostgreSQL (wiele chatów, wiele urządzeń)    |
-| Tożsamość użytkownika | brak — wszyscy są anonimowi           | Rejestracja i logowanie (JWT + bcrypt)       |
-| Trwałość danych       | Po wyczyszczeniu localStorage → brak  | Serwer → dane zawsze dostępne po zalogowaniu |
-| UI                    | Jeden czat                            | Panel z listą chatów + przełączanie          |
-| Streaming odpowiedzi  | Cała odpowiedź naraz (po zakończeniu) | Słowa pojawiają się sukcesywnie (streaming)  |
+| Obszar                | Phase 1                               | Phase 2                                            |
+| --------------------- | ------------------------------------- | -------------------------------------------------- |
+| Historia czatu        | localStorage (tylko jeden czat)       | MySQL — cyber_Folks (wiele chatów, wiele urządzeń) |
+| Tożsamość użytkownika | brak — wszyscy są anonimowi           | Rejestracja i logowanie (JWT + bcrypt)             |
+| Trwałość danych       | Po wyczyszczeniu localStorage → brak  | Serwer → dane zawsze dostępne po zalogowaniu       |
+| UI                    | Jeden czat                            | Panel z listą chatów + przełączanie                |
+| Streaming odpowiedzi  | Cała odpowiedź naraz (po zakończeniu) | Słowa pojawiają się sukcesywnie (streaming)        |
 
 ---
 
@@ -37,7 +37,7 @@
                       │ HTTPS + Authorization: Bearer <token>
                       ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  BACKEND (Render)                                           │
+│  BACKEND (Railway)                                           │
 │  Express.js + TypeScript                                    │
 │                                                             │
 │  POST /api/auth/register  → rejestracja                     │
@@ -53,7 +53,7 @@
                       │
                       ▼ Prisma ORM
 ┌─────────────────────────────────────────────────────────────┐
-│  POSTGRESQL (Render Postgres / Supabase)                    │
+│  MYSQL (cyber_Folks — własny hosting)                      │
 │                                                             │
 │  users    { id, email, passwordHash, createdAt }            │
 │  chats    { id, title, userId, createdAt }                  │
@@ -65,11 +65,32 @@
 
 ## 📅 Podział na Sprinty
 
+### ⚙️ Krok 0 — Przed Sprint 1: Migracja Backend Render → Railway
+
+> **Czas**: ~30–60 min | **Kiedy**: przed pierwszą linią kodu Phase 2
+
+**Dlaczego teraz?**  
+Render zasypia po 15 min bezczynności (cold start ~30 s). Railway działa bez przerw na planie Hobby ($5/mies.) i będzie domem backendu przez całą Phase 2 oraz Phase 3.
+
+**Kroki**:
+
+1. Utwórz konto na railway.app i połącz z repozytorium GitHub
+2. „New Project → Deploy from GitHub repo" → wybierz `fotai.app`
+3. Ustaw „Root Directory" na `backend`
+4. Dodaj zmienne środowiskowe: `OPENAI_API_KEY`, `FRONTEND_URL`, `PORT=3001` (i pozostałe z Render)
+5. Skopiuj nowy URL Railway (np. `https://fotai-app-production.up.railway.app`)
+6. Zaktualizuj `VITE_API_URL` w ustawieniach Vercel na nowy URL
+7. Usuń serwis na Render
+
+**Weryfikacja**: otwórz `<railway-url>/health` — powinno zwrócić `{ status: 'ok' }`. Przetestuj czat na stronie.
+
+---
+
 ### Sprint 1 — Autentykacja (register/login/JWT/bcrypt)
 
 **Cel**: Użytkownik może się zarejestrować i zalogować. Backend chroni endpointy tokenem JWT.
 
-**Technologie**: `bcrypt`, `jsonwebtoken`, `Prisma` (User model), React forms, `authStore` (Zustand), localStorage dla tokenu.
+**Technologie**: `bcrypt`, `jsonwebtoken`, `Prisma` (User model, MySQL), React forms, `authStore` (Zustand), localStorage dla tokenu.
 
 **Efekt końcowy**:
 
@@ -82,7 +103,7 @@
 
 ### Sprint 2 — Danych w bazie & Wieloczatowość
 
-**Cel**: Każda rozmowa jest zapisywana w PostgreSQL. Użytkownik może tworzyć wiele chatów i przełączać się między nimi.
+**Cel**: Każda rozmowa jest zapisywana w MySQL (cyber_Folks). Użytkownik może tworzyć wiele chatów i przełączać się między nimi.
 
 **Technologie**: `Prisma` (Chat + Message models), `uuid`, REST API dla chatów, nowy widok listy chatów w UI.
 
@@ -100,13 +121,14 @@
 
 **Cel**: Odpowiedzi asystenta pojawiają się słowo po słowie (streaming SSE). Całość jest wdrożona na produkcję z migracją bazy danych.
 
-**Technologie**: OpenAI streaming, `ReadableStream`, Server-Sent Events (SSE) lub chunked transfer, aktualizacja Vercel + Render.
+**Technologie**: OpenAI streaming, `ReadableStream`, Server-Sent Events (SSE) lub chunked transfer, migracja Prismy na MySQL cyber_Folks, aktualizacja Vercel + Railway.
 
 **Efekt końcowy**:
 
-- Tekst odpowiedzi AI "pisze się" na żywo
-- Baza danych na produkcji (Render PostgreSQL lub Supabase)
+- Tekst odpowiedzi AI „pisze się” na żywo
+- Baza danych na produkcji (MySQL na cyber_Folks)
 - Migracje Prisma uruchomione na produkcji
+- Backend wdrożony na Railway (GitHub auto-deploy)
 - Pełna aplikacja Phase 2 dostępna online
 
 ---
@@ -152,7 +174,7 @@ model Chat {
 model Message {
   id        String   @id @default(cuid())
   role      String   // "user" | "assistant"
-  content   String
+  content   String   @db.Text
   openaiId  String?  // ID z OpenAI (previousResponseId)
   chatId    String
   chat      Chat     @relation(fields: [chatId], references: [id])
@@ -160,16 +182,19 @@ model Message {
 }
 ```
 
+> ⚠️ **Uwaga MySQL**: Pole `content` ma adnotację `@db.Text` — MySQL wymaga tego dla długich stringów (domyślny `VARCHAR(191)` mógłby ciąć długie odpowiedzi AI).
+
 ---
 
 ## ✅ Definition of Done — Phase 2
 
 - [ ] Rejestracja i logowanie działają (formularz → request → token JWT)
 - [ ] Chronione endpointy wymagają tokenu (401 bez tokenu)
-- [ ] Wiadomości zapisywane w PostgreSQL (nie w localStorage)
+- [ ] Wiadomości zapisywane w MySQL na cyber_Folks (nie w localStorage)
 - [ ] Wiele chatów: tworzenie, lista, przełączanie, usuwanie
 - [ ] Historia dostępna po zalogowaniu na innym urządzeniu
 - [ ] Streaming — odpowiedź pojawia się sukcesywnie w UI
-- [ ] Backend i baza danych wdrożone na produkcję
+- [ ] Backend wdrożony na Railway (GitHub auto-deploy)
+- [ ] Baza MySQL na cyber_Folks — port 3306 otwarty, migracje wykonane
 - [ ] Frontend zaktualizowany na Vercel
 - [ ] Brak błędów CORS, brak błędów w konsoli przeglądarki

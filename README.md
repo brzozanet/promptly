@@ -10,7 +10,7 @@ FOTAI to **aplikacja webowa z AI asystentem** specjalizującym się w **fotograf
 
 **Cel**: Szybkie stworzenie działającego MVP (czat + deploy), następnie iteracyjna rozbudowa o nowe feature'y.
 
-**Zastosowanie**: Projekt portfolio — demonstracja umiejętności: React, TypeScript, Express.js, OpenAI API integration, deployment (Vercel + Render), UI/UX.
+**Zastosowanie**: Projekt portfolio — demonstracja umiejętności: React, TypeScript, Express.js, OpenAI API integration, deployment (Vercel + Railway), UI/UX.
 
 ---
 
@@ -25,16 +25,14 @@ Aplikacja jest dostępna online pod adresem:
 Platformy:
 
 - **Frontend**: [Vercel](https://vercel.com/) — hosting React / Vite
-- **Backend**: [Render](https://render.com/) — hosting Express.js API
-
-> ⚠️ **Cold Start**: Przy pierwszym uruchomieniu (lub po dłuższym czasie bezczynności) backend może się budzić przez 15–30 sekund — to normalne zjawisko na darmowych planach Render. Odczekaj chwilę i odeślij pytanie ponownie.
+- **Backend**: [Railway](https://railway.app/) — hosting Express.js API
 
 ### 📦 Architektura
 
 Aplikacja składa się z dwóch części:
 
 - **Frontend**: React + Vite — hostowany na Vercel
-- **Backend**: Express.js (proxy do OpenAI API) — hostowany na Render
+- **Backend**: Express.js (proxy do OpenAI API) — hostowany na Railway
 
 ---
 
@@ -300,16 +298,19 @@ Otwórz **[http://localhost:3000](http://localhost:3000)** w przeglądarce.
 ### Phase 2: Konta użytkowników & Historia chatów (Q2 2026)
 
 - Rejestracja i logowanie użytkowników
-- Zapisywanie rozmów w bazie danych (PostgreSQL + Prisma ORM)
+- Zapisywanie rozmów w bazie danych (MySQL na cyber_Folks + Prisma ORM)
 - Możliwość tworzenia wielu chatów i przełączania się między nimi
 - Historia rozmów dostępna po zalogowaniu
 - Autentykacja: JWT, bcrypt
+- **Infrastruktura**: Frontend (Vercel) + Backend (Railway) + Baza (MySQL na własnym hostingu)
 
 ### Phase 3: Upload & Ocena Zdjęć (Q3 2026)
 
 - Użytkownik uploaduje zdjęcie → AI analizuje (kompozycja, ekspozycja, błędy)
-- Integracja GPT-4 Vision API + storage zdjęć (S3/Cloudinary)
-- **Migracja do Next.js** — najbardziej sensowny moment: Image Optimization, scalony deployment, API Routes
+- Integracja GPT-4 Vision API
+- **Migracja bazy**: MySQL (cyber_Folks) → PostgreSQL (Supabase Free Tier)
+- **Storage zdjęć**: Supabase Storage (zamiast S3/Cloudinary)
+- Backend zostaje na Railway (unikamy timeoutów Vercel przy przetwarzaniu zdjęć)
 
 ### Phase 4: Edycja Zdjęć przez AI (Q4 2026+)
 
