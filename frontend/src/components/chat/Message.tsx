@@ -18,15 +18,15 @@ export function Message({ role, content, timestamp }: Message) {
           src={avatar}
           alt="assistant"
           title="assistant"
-          className="h-8 w-8 rounded-full"
+          className="h-8 w-8 rounded-full brightness-0 invert"
         />
       )}
 
       <div
-        className={`max-w-[75%] rounded-3xl border border-border/60 px-4 py-2 text-sm shadow-sm ${
+        className={`max-w-[75%] rounded-3xl border border-border/20 px-4 py-2 text-sm shadow-sm ${
           isUser
-            ? "bg-secondary/90 text-secondary-foreground"
-            : "bg-card/95 text-card-foreground"
+            ? "bg-gray-700/80 text-foreground"
+            : "bg-sky-950/90 text-foreground"
         }`}
       >
         <div className="text-left text-[16px] mb-3 mt-1">
@@ -49,7 +49,7 @@ export function Message({ role, content, timestamp }: Message) {
               ),
               a: ({ children, href }) => (
                 <a
-                  className="cursor-pointer font-semibold text-primary underline"
+                  className="cursor-pointer font-semibold text-amber-300 underline"
                   href={href}
                   target="_blank"
                   rel="noreferrer"
@@ -69,7 +69,7 @@ export function Message({ role, content, timestamp }: Message) {
             src={iconClock8}
             alt="timestamp"
             title="timestamp"
-            className="h-4"
+            className="h-4 brightness-0 invert"
           />
           <p className="text-[11px] whitespace-pre-wrap text-left">
             {timestamp}
@@ -81,7 +81,7 @@ export function Message({ role, content, timestamp }: Message) {
           src={avatar}
           alt="user"
           title="user"
-          className="h-8 w-8 rounded-full"
+          className="h-8 w-8 rounded-full brightness-0 invert"
         />
       )}
     </div>

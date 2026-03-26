@@ -7,7 +7,6 @@ import { askAI } from "@/services/chatService";
 import { ThreeCircles } from "react-loader-spinner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircleIcon } from "lucide-react";
-// import { Spinner } from "@/components/ui/spinner";
 
 export function ChatInput() {
   const [input, setInput] = useState<string>("");
@@ -79,7 +78,10 @@ export function ChatInput() {
       {error ? (
         <div className="flex justify-center items-center py-4">
           {" "}
-          <Alert variant="destructive" className="max-w-md text-left px-6 py-6">
+          <Alert
+            variant="destructive"
+            className="max-w-md text-left px-6 py-6 bg-red-100"
+          >
             <AlertCircleIcon />
             <AlertTitle>Chwila przerwy w transmisji 🤖</AlertTitle>
             <AlertDescription>
@@ -92,15 +94,6 @@ export function ChatInput() {
       ) : (
         ""
       )}
-      {/* {isLoading && (
-        <div className="flex w-fit items-center gap-4">
-          <Skeleton className="size-10 shrink-0 rounded-full" />
-          <div className="grid gap-2">
-            <Skeleton className="h-4 w-[150px]" />
-            <Skeleton className="h-4 w-[100px]" />
-          </div>
-        </div>
-      )} */}
       {isLoading && (
         <div className="flex justify-center items-center py-4">
           <ThreeCircles
@@ -122,7 +115,7 @@ export function ChatInput() {
         onSubmit={sendPrompt}
       >
         <Textarea
-          className="min-h-30 resize-none rounded-2xl border-border/70 bg-background/70 text-base text-foreground shadow-none placeholder:text-muted-foreground md:text-base"
+          className="min-h-30 resize-none rounded-2xl border-border/70 bg-background/70 text-base text-black shadow-none placeholder:text-black md:text-base"
           placeholder="Pytaj o fotografię... (Shift+Enter = nowa linia)"
           disabled={isLoading}
           value={input}

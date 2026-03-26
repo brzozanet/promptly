@@ -23,7 +23,7 @@ export function Header() {
   };
 
   return (
-    <header className="material-enter-top sticky top-0 z-50 w-full bg-linear-to-r from-indigo-500 from-10%  via-emerald-500 via-40% to-emerald-550 to-70% px-6 py-4 shadow-2xl">
+    <header className="material-enter-top sticky top-0 z-50 w-full bg-linear-to-r from-indigo-600 from-10%  via-purple-600 via-40% to-emerald-550 to-70% px-6 py-4 shadow-2xl">
       <div className="flex items-center justify-between max-w-5xl mx-auto">
         <div className="flex flex-row gap-3 items-center text-xl font-bold text-black">
           <NavLink to="/">
@@ -50,15 +50,17 @@ export function Header() {
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>Czy na pewno?</AlertDialogTitle>
-                      <AlertDialogDescription>
+                      <AlertDialogTitle className="text-black">
+                        Czy na pewno?
+                      </AlertDialogTitle>
+                      <AlertDialogDescription className="text-black">
                         Rozpoczęcie nowej rozmowy spowoduje nieodwracalne
                         usunięcie aktualnej. Historia rozmów będzie dostępna w
                         kolejnej wersji aplikacji 😊
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel className="cursor-pointer">
+                      <AlertDialogCancel className="cursor-pointer bg-accent text-accent-foreground hover:bg-accent hover:text-accent-foreground">
                         Wróć do aktualnej rozmowy
                       </AlertDialogCancel>
                       <AlertDialogAction

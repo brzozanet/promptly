@@ -1,18 +1,29 @@
 import { Typewriter } from "react-simple-typewriter";
 import { ChatInput } from "../chat/ChatInput";
+import logoFotai from "../../assets/logo/fotai.png";
 
 export function EmptyChat() {
   return (
     <div className="mx-auto flex min-h-[calc(90vh-260px)] w-full max-w-5xl flex-col justify-center px-3 md:px-0">
-      <h1 className="material-enter-up material-delay-1 mb-6 ml-4 text-left text-3xl font-light text-foreground">
-        Porozmawiaj z{" "}
-        <span className="bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold">
+      <div className="flex flex-row gap-4">
+        <h1 className="material-enter-up material-delay-1 mb-6 ml-4 text-left text-3xl text-white font-light">
+          Porozmawiaj z
+        </h1>
+        <img
+          src={logoFotai}
+          alt="fotai.app"
+          title="fotai.app"
+          className="h-8"
+        />
+        {/* <span className="bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-80% bg-clip-text text-transparent font-semibold">
           FOTAI
-        </span>{" "}
-        o fotografii
-      </h1>
+        </span>{" "} */}
+        <h1 className="material-enter-up material-delay-1 mb-6 text-left text-3xl text-white font-light">
+          o fotografii
+        </h1>
+      </div>
       <h2 className="material-enter-soft material-delay-2 mb-6 ml-4 bg-linear-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-80% bg-clip-text text-left text-5xl font-medium text-transparent">
-        <span className="text-foreground">Jak </span>
+        <span className="text-white">Jak </span>
 
         <Typewriter
           words={[

@@ -6,11 +6,9 @@
 :root {
   --radius: 0.625rem;
   --background: oklch(0.97 0.014 208);
-  --foreground: oklch(0.27 0.03 237);
-  --card: oklch(0.99 0.008 214);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.24 0.02 242 / 0.56);
   --card-foreground: oklch(0.26 0.028 237);
-  --popover: oklch(0.99 0.008 214);
-  --popover-foreground: oklch(0.26 0.028 237);
   --primary: oklch(0.61 0.16 238);
   --primary-foreground: oklch(0.99 0.004 106);
   --secondary: oklch(0.9 0.03 224);
@@ -23,19 +21,6 @@
   --border: oklch(0.86 0.018 228);
   --input: oklch(0.95 0.01 224);
   --ring: oklch(0.67 0.11 237);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
 }
 
 @theme inline {
@@ -50,8 +35,6 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -63,19 +46,6 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 .dark {
@@ -83,8 +53,6 @@
   --foreground: oklch(0.93 0.01 228);
   --card: oklch(0.25 0.02 242);
   --card-foreground: oklch(0.95 0.008 220);
-  --popover: oklch(0.25 0.02 242);
-  --popover-foreground: oklch(0.95 0.008 220);
   --primary: oklch(0.75 0.11 237);
   --primary-foreground: oklch(0.23 0.03 245);
   --secondary: oklch(0.32 0.02 240);
@@ -97,19 +65,6 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
 @layer base {
@@ -163,7 +118,7 @@
   }
 
   .top-nav-link-gradient {
-    @apply border border-transparent text-black;
+    @apply border border-transparent;
   }
 
   .top-nav-link-gradient:hover {
@@ -183,7 +138,7 @@
   }
 
   .material-surface {
-    @apply border border-border/70 bg-card/88 backdrop-blur-md;
+    @apply bg-card/88 backdrop-blur-xl;
     box-shadow: 0 8px 24px oklch(0.35 0.02 240 / 0.1);
     animation: material-enter-up 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
@@ -199,7 +154,7 @@
   }
 
   .info-page blockquote {
-    @apply rounded-2xl border border-border/70 bg-card/85 px-6 py-4 backdrop-blur-md;
+    @apply rounded-2xl bg-card/85 px-6 py-4 backdrop-blur-md;
     box-shadow: 0 8px 24px oklch(0.35 0.02 240 / 0.1);
   }
 
