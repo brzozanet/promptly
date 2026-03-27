@@ -7,7 +7,7 @@ export function HowItWorksPage() {
           className="pointer-events-none absolute -inset-x-4 inset-y-0 -z-10 rounded-3xl bg-black/65 backdrop-blur-2xl md:-inset-x-6"
         />
         <div className="relative z-10">
-          <h2 className="material-title mb-10 mt-10 text-5xl font-semibold">
+          <h2 className="material-title mb-10 mt-10 text-5xl leading-15 font-semibold">
             Jak działa FOTAI?
           </h2>
           <p className="mb-4">
