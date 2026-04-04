@@ -196,7 +196,7 @@ OPENAI_API_KEY=your_openai_api_key_here
 OPENAI_MODEL=gpt-5-mini
 PORT=3001
 NODE_ENV=development
-DATABASE_URL=mysql://root:password@localhost:3306/fotai_dev
+DATABASE_URL=mysql://root:TWOJE_LOKALNE_HASLO@localhost:3306/fotai_dev
 JWT_SECRET=change-me-in-local-env
 FRONTEND_URL=http://localhost:3000
 SYSTEM_PROMPT=Jesteś ekspertem w fotografii...
@@ -207,10 +207,32 @@ SYSTEM_PROMPT=Jesteś ekspertem w fotografii...
 Lokalna baza MariaDB jest opisana w [docker-compose.yml](./docker-compose.yml), a wartości dla Compose są trzymane w rootowym pliku `.env`:
 
 ```env
-MYSQL_ROOT_PASSWORD=password
+MYSQL_ROOT_PASSWORD=twoje-lokalne-haslo
 MYSQL_DATABASE=fotai_dev
 MYSQL_PORT=3306
 ```
+
+Najpierw skopiuj przykład do pliku roboczego:
+
+**Windows PowerShell**:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+**Windows CMD**:
+
+```bat
+copy .env.example .env
+```
+
+**macOS / Linux / Git Bash**:
+
+```bash
+cp .env.example .env
+```
+
+Compose używa też named volume `fotai_mysql_data`, więc dane MariaDB nie znikają po zwykłym zatrzymaniu lub odtworzeniu kontenera.
 
 ### Frontend (`frontend/.env.local`)
 
