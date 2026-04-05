@@ -7,10 +7,10 @@ generator client {
 }
 
 model User {
-  id            String   @id @default(cuid())
-  email         String   @unique
+  id            String    @id @default(cuid())
+  email         String    @unique
   passwordHash  String
-  createdAt     DateTime @default(now())
+  createdAt     DateTime  @default(now())
   chats         Chat[]
 }
 
@@ -24,13 +24,13 @@ model Chat {
 }
 
 model Message {
-  id        String    @id @default(cuid())
-  content   String    @db.Text
-  role      MessageRole
+  id        String      @id @default(cuid())
+  role      MessageRole 
+  content   String      @db.Text
   openaiId  String?
   chatId    String
-  chat      Chat      @relation(fields: [chatId], references: [id], onDelete: Cascade)
-  createdAt DateTime  @default(now())
+  chat      Chat        @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  createdAt DateTime    @default(now())
 }
 
 enum MessageRole {
