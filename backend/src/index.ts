@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import chalk from "chalk";
 import { chatRouter } from "./routes/chat.js";
+import { authRouter } from "./routes/auth.js";
 
 dotenv.config();
 
@@ -28,8 +29,8 @@ app.use(express.json());
 
 // NOTE: Routes - definicje endpointów API
 
-// Wszystkie requesty do /api/chat obsługuje chatRouter
 app.use("/api/chat", chatRouter);
+app.use("/api/auth", authRouter);
 
 app.get("/health", (request, response) => {
   response.json({
