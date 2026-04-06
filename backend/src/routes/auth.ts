@@ -14,7 +14,7 @@ authRouter.post("/register", (request: Request, response: Response) => {
         .status(400)
         .json({ error: "Wszystkie dane są wymagane" } as ErrorResponse);
     }
-    return response.json({ name, email, password });
+    return response.status(200).json({ name, email, password });
   } catch (error) {
     const internalError: ErrorResponse = {
       error: "Server crashed succesfully 😵‍💫",
