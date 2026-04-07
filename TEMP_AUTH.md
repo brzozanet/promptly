@@ -146,12 +146,12 @@ auth.ts
 │ ├── prisma.user.create()
 │ ├── jwt.sign()
 │ └── response 201 (token + user)
-└── POST /login
-├── walidacja inputu (400)
-├── prisma.user.findUnique()
-├── bcrypt.compare() + generic error (401)
-├── jwt.sign()
-└── response 200 (token + user)
+├── POST /login
+│ ├── walidacja inputu (400)
+│ ├── prisma.user.findUnique()
+│ ├── bcrypt.compare() + generic error (401)
+│ ├── jwt.sign()
+│ └── response 200 (token + user)
 ```
 
 ---
