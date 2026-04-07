@@ -135,6 +135,7 @@ Plik powinien mieć taki układ:
 4. Handler `POST /register`
 5. Handler `POST /login`
 
+```
 auth.ts
 ├── importy (4 źródła)
 ├── stałe (JWT_SECRET, BCRYPT_ROUNDS)
@@ -151,6 +152,7 @@ auth.ts
 ├── bcrypt.compare() + generic error (401)
 ├── jwt.sign()
 └── response 200 (token + user)
+```
 
 ---
 
