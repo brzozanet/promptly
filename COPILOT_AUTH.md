@@ -1,4 +1,4 @@
-# TEMP AUTH
+# COPILOT AUTH
 
 To jest robocza wersja planu do samodzielnego napisania pliku `backend/src/routes/auth.ts`.
 
