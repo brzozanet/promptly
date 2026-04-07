@@ -12,7 +12,7 @@ const adapter = new PrismaMariaDb({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  port: 3306,
+  port: Number(process.env.DB_NAME),
 });
 
 // Rozszerzamy typ globalThis o pole prisma, żeby TypeScript wiedział,

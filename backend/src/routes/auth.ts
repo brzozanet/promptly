@@ -1,6 +1,20 @@
 import { Router, Request, Response } from "express";
 import { ErrorResponse, RegisterRequest } from "../types/auth";
 import { prisma } from "../lib/prisma";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET;
+const BCRYPT_ROUNDS = Number(process.env.BCRYPT_ROUNDS || 10);
+
+if (
+  !Number.isInteger(BCRYPT_ROUNDS) ||
+  BCRYPT_ROUNDS < 10 ||
+  BCRYPT_ROUNDS > 14
+) {
+  throw new Error("BCRYPT_ROUNDS musi być liczbą całkowitą w zakresie 10-14");
+}
 
 export const authRouter = Router();
 
