@@ -135,6 +135,23 @@ Plik powinien mieć taki układ:
 4. Handler `POST /register`
 5. Handler `POST /login`
 
+auth.ts
+├── importy (4 źródła)
+├── stałe (JWT_SECRET, BCRYPT_ROUNDS)
+├── POST /register
+│ ├── walidacja inputu (400)
+│ ├── check unikalności emaila (409)
+│ ├── bcrypt.hash()
+│ ├── prisma.user.create()
+│ ├── jwt.sign()
+│ └── response 201 (token + user)
+└── POST /login
+├── walidacja inputu (400)
+├── prisma.user.findUnique()
+├── bcrypt.compare() + generic error (401)
+├── jwt.sign()
+└── response 200 (token + user)
+
 ---
 
 ## 5. Mentalny model działania
