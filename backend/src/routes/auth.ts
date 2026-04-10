@@ -9,6 +9,12 @@ dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
 const BCRYPT_ROUNDS = Number(process.env.BCRYPT_ROUNDS || 10);
 
+if (!JWT_SECRET) {
+  throw new Error(
+    "Brak wymaganych zmiennych. Uzupełnij plik .env i uruchom backend ponownie",
+  );
+}
+
 if (
   !Number.isInteger(BCRYPT_ROUNDS) ||
   BCRYPT_ROUNDS < 10 ||
@@ -46,13 +52,15 @@ authRouter.post("/register", async (request: Request, response: Response) => {
       } as ErrorResponse);
     }
 
-    const hashedPassword = await bcrypt.hash(password, BCRYPT_ROUNDS);
+    const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
 
     const newUser = await prisma.user.create({
-      data: { name: name, email: email, passwordHash: hashedPassword },
+      data: { name: name, email: email, passwordHash: passwordHash },
     });
 
-    return response.status(200).json(newUser);
+    // const token =
+
+    return response.status(201).json(newUser);
   } catch (error) {
     const internalError: ErrorResponse = {
       error: "Server crashed succesfully 😵‍💫",

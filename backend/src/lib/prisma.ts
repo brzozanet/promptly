@@ -5,13 +5,13 @@ import dotenv from "dotenv";
 // Wczytuje zmienne z backend/.env do process.env zanim stworzymy adapter i klienta Prisma.
 dotenv.config();
 
-if (
-  !process.env.DB_HOST ||
-  !process.env.DB_USER ||
-  !process.env.DB_PASSWORD ||
-  !process.env.DB_NAME ||
-  !process.env.DB_PORT
-) {
+const DB_HOST = process.env.DB_HOST;
+const DB_USER = process.env.DB_USER;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_NAME = process.env.DB_NAME;
+const DB_PORT = process.env.DB_PORT;
+
+if (!DB_HOST || !DB_USER || !DB_PASSWORD || !DB_NAME || !DB_PORT) {
   throw new Error(
     "Brak wymaganych zmiennych. Uzupełnij plik .env i uruchom backend ponownie",
   );
@@ -20,11 +20,11 @@ if (
 // Adapter mówi Prisma 7, jakim sterownikiem i z jakimi danymi ma łączyć się z bazą.
 // Dzięki temu logika zapytań zostaje w Prisma, a szczegóły połączenia są wymienne.
 const adapter = new PrismaMariaDb({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: Number(process.env.DB_PORT),
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_NAME,
+  port: Number(DB_PORT),
 });
 
 // Rozszerzamy typ globalThis o pole prisma, żeby TypeScript wiedział,
