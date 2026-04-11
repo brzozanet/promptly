@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import { ErrorResponse, RegisterRequest } from "../types/auth";
 import { prisma } from "../lib/prisma";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 
@@ -52,11 +53,9 @@ authRouter.post("/register", async (request: Request, response: Response) => {
       } as ErrorResponse);
     }
 
-    const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
+    // const passwordHash =
 
-    const newUser = await prisma.user.create({
-      data: { name: name, email: email, passwordHash: passwordHash },
-    });
+    // const newUser =
 
     // const token =
 
