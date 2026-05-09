@@ -4,11 +4,13 @@ import { prisma } from "../lib/prisma";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import { Prisma } from "@prisma/client";
 
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const BCRYPT_ROUNDS = Number(process.env.BCRYPT_ROUNDS || 10);
+const TOKEN_EXPIRES_IN = "1d";
 
 if (!JWT_SECRET) {
   throw new Error(
@@ -42,10 +44,16 @@ authRouter.post("/register", async (request: Request, response: Response) => {
         .json({ error: "Wszystkie dane są wymagane" } as ErrorResponse);
     }
 
+    if (password !== password.trim()) {
+      return response.status(400).json({
+        error: "Hasło nie może zaczynać się ani kończyć spacją",
+      } as ErrorResponse);
+    }
+
     const normalizedEmail = email.trim().toLowerCase();
     const normalizedName = name.trim();
 
-    if (!normalizedEmail || !normalizedName || !password.trim()) {
+    if (!normalizedEmail || !normalizedName || !password) {
       return response
         .status(400)
         .json({ error: "Wszystkie dane są wymagane" } as ErrorResponse);
@@ -77,18 +85,27 @@ authRouter.post("/register", async (request: Request, response: Response) => {
       select: {
         id: true,
         name: true,
+        email: true,
       },
     });
 
     const token = jwt.sign({ userId: newUser.id }, JWT_SECRET, {
-      expiresIn: "1d",
+      expiresIn: TOKEN_EXPIRES_IN,
     });
 
     return response.status(201).json({ user: newUser, token });
   } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2002"
+    ) {
+      return response.status(409).json({
+        error: "Taki użytkownik już istnieje",
+      } as ErrorResponse);
+    }
+
     const internalError: ErrorResponse = {
-      error: "Server crashed succesfully 😵‍💫",
-      details: `${error}`,
+      error: "Wewnętrzny błąd serwera 😵‍💫",
     };
     console.error(error);
     return response.status(500).json(internalError);
@@ -107,9 +124,15 @@ authRouter.post("/login", async (request: Request, response: Response) => {
       } as ErrorResponse);
     }
 
+    if (password !== password.trim()) {
+      return response.status(400).json({
+        error: "Hasło nie może zaczynać się ani kończyć spacją",
+      } as ErrorResponse);
+    }
+
     const normalizedEmail = email.trim().toLowerCase();
 
-    if (!normalizedEmail || !password.trim()) {
+    if (!normalizedEmail || !password) {
       return response.status(400).json({
         error: "Wszystkie pola sa wymagane",
       } as ErrorResponse);
@@ -117,6 +140,7 @@ authRouter.post("/login", async (request: Request, response: Response) => {
 
     const findUser = await prisma.user.findUnique({
       where: { email: normalizedEmail },
+      select: { id: true, name: true, email: true, passwordHash: true },
     });
 
     if (!findUser) {
@@ -135,11 +159,21 @@ authRouter.post("/login", async (request: Request, response: Response) => {
       } as ErrorResponse);
     }
 
-    return response.status(200).json({ findUser, isPasswordValid });
+    const token = jwt.sign({ userId: findUser.id }, JWT_SECRET, {
+      expiresIn: TOKEN_EXPIRES_IN,
+    });
+
+    return response.status(200).json({
+      user: {
+        id: findUser.id,
+        name: findUser.name,
+        email: findUser.email,
+      },
+      token,
+    });
   } catch (error) {
     const internalError: ErrorResponse = {
-      error: "Server crashed succesfully 😵‍💫",
-      details: `${error}`,
+      error: "Wewnętrzny błąd serwera 😵‍💫",
     };
     console.error(error);
     return response.status(500).json(internalError);
