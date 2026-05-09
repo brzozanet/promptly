@@ -118,7 +118,7 @@ eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJjbG9iLi4uIn0.xK9mP...
 
 ---
 
-## 🎯 Task 1.1: Lokalna baza MySQL (0.25h)
+## 🎯 [X] Task 1.1: Lokalna baza MySQL (0.25h)
 
 ### Cel
 
@@ -238,7 +238,7 @@ Wstaw tu dokładnie to samo hasło, które wpisałeś w `MYSQL_ROOT_PASSWORD`. T
 
 ---
 
-## 🎯 Task 1.2: Konfiguracja Prisma ORM (0.5h)
+## 🎯 [X] Task 1.2: Konfiguracja Prisma ORM (0.5h)
 
 ### Cel
 
@@ -409,7 +409,7 @@ Otwiera się przeglądarka pod `http://localhost:5555` z GUI do przeglądania ba
 
 ---
 
-## 🎯 Task 1.3: Klient Prismy (Singleton) (0.25h)
+## 🎯 [X] Task 1.3: Klient Prismy (Singleton) (0.25h)
 
 ### Cel
 
@@ -471,7 +471,7 @@ W development Prisma loguje każde zapytanie SQL w konsoli — pomocne do debugo
 
 ---
 
-## 🎯 Task 1.4: Endpointy Autentykacji — Backend (1h)
+## 🎯 [X] Task 1.4: Endpointy Autentykacji — Backend (1h)
 
 ### Cel
 
@@ -655,7 +655,7 @@ curl -X POST http://localhost:3001/api/auth/login \
 
 ---
 
-## 🎯 Task 1.5: Middleware JWT (0.5h)
+## 🎯 [ ] Task 1.5: Middleware JWT (0.5h)
 
 ### Cel
 
@@ -782,7 +782,7 @@ curl http://localhost:3001/api/chats \
 
 ---
 
-## 🎯 Task 1.6: Typy współdzielone (0.25h)
+## 🎯 [ ] Task 1.6: Typy współdzielone (0.25h)
 
 ### Cel
 
@@ -845,7 +845,7 @@ export interface AuthError {
 
 ---
 
-## 🎯 Task 1.7: authService na Frontendzie (0.5h)
+## 🎯 [ ] Task 1.7: authService na Frontendzie (0.5h)
 
 ### Cel
 
