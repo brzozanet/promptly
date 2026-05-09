@@ -4,7 +4,6 @@ import { prisma } from "../lib/prisma";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import { request } from "node:http";
 
 dotenv.config();
 
@@ -116,17 +115,6 @@ authRouter.post("/login", async (request: Request, response: Response) => {
       } as ErrorResponse);
     }
 
-    // FIXME: W tym fragmencie masz trochę zbędnego rozgałęzienia:
-    // - najpierw sprawdzasz, czy user istnieje,
-    // - potem znowu robisz if z tym samym userem,
-    // - trzymasz zmienną authUser, choć potrzebujesz tylko boola.
-    // To można skrócić i uczynić czytelniejszym.
-    // Flow jest prosty:
-    // - znajdź usera,
-    // - jeśli brak → 401,
-    // - sprawdź hasło,
-    // - jeśli błędne → 401.
-
     const findUser = await prisma.user.findUnique({
       where: { email: normalizedEmail },
     });
@@ -136,16 +124,15 @@ authRouter.post("/login", async (request: Request, response: Response) => {
         error: "Niepoprawne dane logowania",
       } as ErrorResponse);
     }
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      findUser.passwordHash,
+    );
 
-    let isPasswordValid;
-
-    if (findUser) {
-      isPasswordValid = await bcrypt.compare(password, findUser.passwordHash);
-      if (!isPasswordValid) {
-        return response.status(401).json({
-          error: "Niepoprawne dane logowania",
-        } as ErrorResponse);
-      }
+    if (!isPasswordValid) {
+      return response.status(401).json({
+        error: "Niepoprawne dane logowania",
+      } as ErrorResponse);
     }
 
     return response.status(200).json({ findUser, isPasswordValid });
